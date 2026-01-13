@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import main.pij.model.Tile;
+import main.pij.model.Bag;
 
 import java.util.List;
 
@@ -30,6 +31,14 @@ public class ScrabbleTest {
         System.out.println("--------------------------------------");
         assertEquals('_', wildcard.getLetter());
         assertEquals(8, wildcard.getValue());
+    }
+
+    @Test void TestBagInitialization() {
+        System.out.println("TestBagInitialization");
+        main.pij.model.Bag bag = new main.pij.model.Bag();
+        System.out.println("Total tiles in bag: " + bag.tilesRemaining());
+        System.out.println("--------------------------------------");
+        assertEquals(100, bag.tilesRemaining()); // Standard Scrabble bag has 100 tiles
     }
 
 
