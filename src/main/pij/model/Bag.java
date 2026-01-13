@@ -70,4 +70,15 @@ public class Bag {
     public int tilesRemaining() {
         return tiles.size();
     }
+
+    /**
+     * Show a tile from the bag.
+     */
+    public int showBag() {                                                                                                                                 
+        System.out.println("Bag contains " + tiles.size() + " tiles:");                                                                                     
+        for (Tile tile : tiles) {                                                                                                                           
+            System.out.println("  " + tile.getLetter() + " (value: " + tile.getValue() + ")");                                                              
+        }
+        return tiles.size();                                                                                                                                                  
+    } 
 }

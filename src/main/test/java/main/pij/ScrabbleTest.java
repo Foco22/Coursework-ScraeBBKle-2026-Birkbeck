@@ -33,13 +33,26 @@ public class ScrabbleTest {
         assertEquals(8, wildcard.getValue());
     }
 
-    @Test void TestBagInitialization() {
+    @Test 
+    public void TestBagInitialization() {
         System.out.println("TestBagInitialization");
         main.pij.model.Bag bag = new main.pij.model.Bag();
         System.out.println("Total tiles in bag: " + bag.tilesRemaining());
         System.out.println("--------------------------------------");
         assertEquals(100, bag.tilesRemaining()); // Standard Scrabble bag has 100 tiles
     }
+
+    @Test
+    public void TestShowbag() {
+        System.out.println("testDrawTiles");
+        main.pij.model.Bag bag = new main.pij.model.Bag();
+        int tilessize = bag.showBag();
+        System.out.println("Tiles in bag: " + tilessize);
+        System.out.println("--------------------------------------");
+        assertEquals(100, tilessize); // Standard Scrabble bag has 100 tiles
+
+    }
+
 
 
 }
