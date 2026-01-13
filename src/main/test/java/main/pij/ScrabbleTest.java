@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import main.pij.model.Tile;
 import main.pij.model.Bag;
+import main.pij.model.Cell;
 
 import java.util.List;
 
@@ -67,4 +68,15 @@ public class ScrabbleTest {
         assertEquals(7, drawnTiles.size());
         assertEquals(93, bag.tilesRemaining());
     }
+
+    @Test
+    public void testCellCreation() {
+        System.out.println("testCellCreation");
+        Cell cell = new Cell('A', 2, 3);
+        System.out.println("Created cell with letter: " + cell.getLetter() + ", letter multiplier: " + cell.getLetterMult() + ", word multiplier: " + cell.getWordMult());
+        System.out.println("--------------------------------------");
+        assertEquals('A', cell.getLetter());
+        assertEquals(2, cell.getLetterMult());
+        assertEquals(3, cell.getWordMult());
+    }   
 }
