@@ -25,7 +25,7 @@ public class Cell {
         this.letterMult = 0;
         this.wordMult = 0;
     }
-
+    // Getter the letters, wordMult and letterMult
     public char getLetter() {
         return letter;
     }
@@ -36,4 +36,37 @@ public class Cell {
         return wordMult;    
     }
 
+    // Setter the letters, wordMult and letterMult
+    public void setLetter(char letter) {
+        this.letter = letter;
+    }
+    public void setLetterMult(int letterMult) {
+        this.letterMult = letterMult;
+    }
+    public void setWordMult(int wordMult) { 
+        this.wordMult = wordMult;
+    }
+    /**
+     * Review if the cell is empty.
+     */
+    public boolean isEmpty() {
+        return letter == '.';
+    }
+
+    /**
+     * Method to override the toString default method for String. It can be useful for printing the board. It will be testing in the UnitTest
+     * Only show the letter in the board, if it is neccesary to show the multipliers, it can be shown use the other methods.
+     */
+    @Override
+    public String toString() {
+        if (letter != '.') {
+            return String.valueOf(letter);
+        } else if (wordMult != 0) {
+            return wordMult + "!";
+        } else if (letterMult != 0) {
+            return letterMult + ".";
+        } else {
+            return ".";
+        }
+    }
 }

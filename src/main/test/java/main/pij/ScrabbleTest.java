@@ -79,4 +79,13 @@ public class ScrabbleTest {
         assertEquals(2, cell.getLetterMult());
         assertEquals(3, cell.getWordMult());
     }   
+
+    @Test
+    public void testCelltoString() {
+        System.out.println("testCelltoString");
+        Cell cell = new Cell('B', 1, 2);
+        System.out.println("Cell toString output: " + cell.toString());
+        System.out.println("--------------------------------------");
+        assertEquals("B", cell.toString());
+    }
 }
