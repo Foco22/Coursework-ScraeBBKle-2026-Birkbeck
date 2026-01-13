@@ -53,6 +53,18 @@ public class ScrabbleTest {
 
     }
 
-
-
+    @Test
+    public void testDrawTiles() {
+        System.out.println("testDrawTiles");
+        main.pij.model.Bag bag = new main.pij.model.Bag();
+        List<Tile> drawnTiles = bag.drawTiles(7);
+        System.out.println("Drawn tiles:");
+        for (Tile tile : drawnTiles) {
+            System.out.println("  " + tile.getLetter() + " (value: " + tile.getValue() + ")");
+        }
+        System.out.println("Remaining tiles in bag: " + bag.tilesRemaining());
+        System.out.println("--------------------------------------");
+        assertEquals(7, drawnTiles.size());
+        assertEquals(93, bag.tilesRemaining());
+    }
 }

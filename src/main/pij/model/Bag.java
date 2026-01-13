@@ -81,4 +81,33 @@ public class Bag {
         }
         return tiles.size();                                                                                                                                                  
     } 
+
+    /**
+     * Draw tiles from the bag.
+     */
+    public List<Tile> drawTiles(int count) {
+        if (count > tiles.size()) {
+            count = tiles.size();
+        }
+
+        // create a list the title needed to be drawn
+        List<Tile> drawnTiles = new ArrayList<>();
+        
+        for (int i = 0; i < count; i++) {
+            if (!tiles.isEmpty()) {
+                // Remove a title in the end of the bag, and adding to the drawntitle
+
+                drawnTiles.add(tiles.remove(tiles.size() - 1));
+            }
+        }
+        return drawnTiles;
+    }
+
+    /**
+     * Check if the bag is empty.
+     */
+        public boolean isEmpty() {
+            return tiles.isEmpty();
+    }
+
 }
