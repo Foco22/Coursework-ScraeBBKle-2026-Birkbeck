@@ -7,6 +7,7 @@ import main.pij.model.Tile;
 import main.pij.model.Bag;
 import main.pij.model.Cell;
 import main.pij.model.Board;
+import main.pij.model.Player;
 
 import java.util.List;
 
@@ -119,5 +120,22 @@ public class ScrabbleTest {
         } catch (Exception e) {
             fail("Exception error: " + e.getMessage());
         }
+    }
+
+    @Test
+    public void testPlayerInitialDraw() {
+        System.out.println("testPlayerInitialDraw");
+        Bag bag = new Bag();
+        Player player = new Player('h'); // 'h' for human player
+        player.initialDraw(bag);
+        List<Tile> rack = player.getRack();
+        int rackSize = player.countTilesInRack();
+        System.out.println("Player initial draw completed.");
+        System.out.println("Player's rack:");
+        for (Tile tile : rack) {
+            System.out.println("  " + tile.getLetter() + " (value: " + tile.getValue() + ")");
+        }
+        assertEquals(7, rackSize); // Check board size
+        System.out.println("--------------------------------------");
     }
 }

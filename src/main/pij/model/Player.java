@@ -17,4 +17,20 @@ public class Player {
         this.rack = new ArrayList<>();
     }
 
+    /**
+     * Draw initial 7 tiles from the bag.
+     */
+    public void initialDraw(Bag bag) {
+        List<Tile> drawn = bag.drawTiles(7);
+        rack.addAll(drawn);
+    }
+
+    public List<Tile> getRack() {
+        return rack;
+    }
+
+    public int countTilesInRack() {
+        return rack.size();
+    }
+
 }
