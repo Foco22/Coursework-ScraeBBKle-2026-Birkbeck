@@ -64,10 +64,18 @@ public class Board {
 
         // Line 0: columns, Line 1: rows, Line 2: start position (e.g., d7), make the transformation to cell coordinates
         if (lines.size() >= 3) {
+            this.columns = Integer.parseInt(lines.get(0).trim());
+            this.rows = Integer.parseInt(lines.get(1).trim());
             this.startPosition = parseStartPosition(lines.get(2).trim());
             System.out.println("Start position parsed:" + startPosition[0] + "," + startPosition[1]);
-        }
+
+            this.board = new Cell[rows][columns];
+            initializeBoard();
+        }   
         
+        
+
+    
         // Parse board data starting from line 3
         int rowIndex = 0;
         for (int i = 3; i < lines.size(); i++) {
