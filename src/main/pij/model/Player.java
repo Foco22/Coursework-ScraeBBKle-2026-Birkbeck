@@ -33,4 +33,12 @@ public class Player {
         return rack.size();
     }
 
+    public boolean isHuman() {
+        return type == 'h';
+    }
+
+    public boolean isComputer() {
+        return type == 'c';
+    }
+
 }
