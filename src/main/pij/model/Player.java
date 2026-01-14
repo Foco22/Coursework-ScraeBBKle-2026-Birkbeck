@@ -56,7 +56,16 @@ public class Player {
         this.score += points;
     }
 
-    
+    /**
+     * Method to display the player's rack.
+     */
+    public void showRack() {
+        System.out.print("Rack: ");
+        for (Tile tile : rack) {
+            System.out.print(tile.getLetter() + " ");
+        }
+        System.out.println();
+    }
 
 
 }
