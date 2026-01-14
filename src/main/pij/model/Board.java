@@ -38,7 +38,27 @@ public class Board {
                 lines.add(line);
             }
         }
+
+        // Line 0: columns, Line 1: rows, Line 2: start position (e.g., d7), make the transformation to cell coordinates
+        if (lines.size() >= 3) {
+            startPosition = parseStartPosition(lines.get(2).trim());
+            System.out.println("Start position parsed:" + startPosition[0] + "," + startPosition[1]);
+        }
+        
         return lines;
+    }
+
+     /**
+     * Get the start position of the "d7".
+     */
+    private int[] parseStartPosition(String position) {
+        if (position == null || position.isEmpty()) {
+            return null;
+        }
+        char colChar = Character.toLowerCase(position.charAt(0));
+        int col = colChar - 'a';
+        int row = Integer.parseInt(position.substring(1)) - 1;
+        return new int[]{row, col};
     }
 
 }
