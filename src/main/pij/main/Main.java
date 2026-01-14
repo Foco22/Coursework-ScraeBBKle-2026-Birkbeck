@@ -37,7 +37,7 @@ public class Main {
             if (!filename.startsWith("resources/")) {
                 filename = "resources/" + filename;
             }
-            
+
             try {
                 board = new Board(0);
                 board.loadFromFile(filename);
