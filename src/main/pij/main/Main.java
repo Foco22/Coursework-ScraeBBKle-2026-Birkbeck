@@ -28,10 +28,16 @@ public class Main {
         if (boardChoice.equals("l")) {
             System.out.println("Enter the filename to load the board from (in resources/):");
             String filename = scanner.nextLine().trim();
+
+            // Add .txt extension if not provided
+            if (!filename.endsWith(".txt")) {
+                filename = filename + ".txt";
+            }
             // Always look in resources/ folder
             if (!filename.startsWith("resources/")) {
                 filename = "resources/" + filename;
             }
+            
             try {
                 board = new Board(0);
                 board.loadFromFile(filename);
