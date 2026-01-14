@@ -26,8 +26,12 @@ public class Main {
 
         Board board;
         if (boardChoice.equals("l")) {
-            System.out.println("Enter the filename to load the board from:");
+            System.out.println("Enter the filename to load the board from (in resources/):");
             String filename = scanner.nextLine().trim();
+            // Always look in resources/ folder
+            if (!filename.startsWith("resources/")) {
+                filename = "resources/" + filename;
+            }
             try {
                 board = new Board(0);
                 board.loadFromFile(filename);
