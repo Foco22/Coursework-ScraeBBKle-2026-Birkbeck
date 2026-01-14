@@ -99,4 +99,21 @@ public class ScrabbleTest {
         System.out.println("--------------------------------------");
         assertNotNull(board);
     }
+
+    @Test
+    public void testLoadBoardFromFile() {
+        System.out.println("testLoadBoardFromFile");
+        Board board = new Board(15);
+        try {
+            List<String> lines = board.loadFromFile("resources/defaultBoard.txt");
+            System.out.println("Loaded board configuration:");
+            for (String line : lines) {
+                System.out.println(line);
+            }
+            System.out.println("--------------------------------------");
+            assertFalse(lines.isEmpty());
+        } catch (Exception e) {
+            fail("Exception error: " + e.getMessage());
+        }
+    }
 }

@@ -14,7 +14,6 @@ public class Board {
     private final Cell[][] board;
     private int[] startPosition;
 
-
     public Board(int size) {
         this.size = size;
         this.board = new Cell[size][size];
@@ -25,6 +24,21 @@ public class Board {
                 board[row][col] = new Cell();
             }
         }
+    }
+
+    /**
+     * Load board configuration from file.
+     */
+    public List<String> loadFromFile(String filename) throws IOException {
+        List<String> lines = new ArrayList<>();
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                lines.add(line);
+            }
+        }
+        return lines;
     }
 
 }
