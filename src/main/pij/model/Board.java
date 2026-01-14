@@ -10,10 +10,18 @@ import java.util.List;
  * Represents the Scrabble game board.
  */
 public class Board {
-    private final int size;
+    private int columns; // M: 7-26
+    private int rows;    // N: 10-99
     private final Cell[][] board;
     private int[] startPosition;
 
+    // Validation constants
+    private static final int MIN_COLUMNS = 7;
+    private static final int MAX_COLUMNS = 26;
+    private static final int MIN_ROWS = 10;
+    private static final int MAX_ROWS = 99;
+    private static final int MIN_SQUARES = 192;
+    
     public Board(int size) {
         this.size = size;
         this.board = new Cell[size][size];

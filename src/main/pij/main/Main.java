@@ -23,10 +23,7 @@ public class Main {
         // 1. Board choice
         System.out.println("Would you like to _l_oad a board or use the _d_efault board?");
         String boardChoice = scanner.nextLine().trim().toLowerCase();
-
-        scanner.close();
     }
-
     public static void main(String[] args) {
         Main main = new Main();
         main.run();

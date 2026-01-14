@@ -6,3 +6,10 @@ javac -d out/test -cp "lib/junit-platform-console-standalone-1.10.1.jar:out/prod
                                                                                                                                                         
 # Ejecutar tests                                                                                                                                        
 java -jar lib/junit-platform-console-standalone-1.10.1.jar -cp "out/test:out/production" --scan-classpath
+
+
+javac -d out src/main/pij/model/*.java src/main/pij/service/*.java src/main/pij/main/*.java                                                               
+                                                                                                                                                            
+# Ejecutar Main                                                                                                                                           
+java -cp out main.pij.main.Main                                                                                                                           
+                                       
