@@ -25,6 +25,17 @@ public class Player {
         rack.addAll(drawn);
     }
 
+    /**
+     * Draw tiles to refill rack to 7 tiles.
+     */
+    public void refillRack(Bag bag) {
+        int needed = 7 - rack.size();
+        if (needed > 0) {
+            List<Tile> drawn = bag.drawTiles(needed);
+            rack.addAll(drawn);
+        }
+    }
+
     public List<Tile> getRack() {
         return rack;
     }
@@ -44,6 +55,8 @@ public class Player {
     public void addScore(int points) {
         this.score += points;
     }
+
+    
 
 
 }
