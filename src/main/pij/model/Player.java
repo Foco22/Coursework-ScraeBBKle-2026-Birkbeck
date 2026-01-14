@@ -56,6 +56,10 @@ public class Player {
         this.score += points;
     }
 
+    public int getScore() {
+        return score;
+    }
+
     /**
      * Method to display the player's rack.
      */

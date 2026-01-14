@@ -132,10 +132,10 @@ public class ScrabbleTest {
         int rackSize = player.countTilesInRack();
         System.out.println("Player initial draw completed.");
         System.out.println("Player's rack:");
-        for (Tile tile : rack) {
-            System.out.println("  " + tile.getLetter() + " (value: " + tile.getValue() + ")");
-        }
+        player.showRack();
         assertEquals(7, rackSize); // Check board size
         System.out.println("--------------------------------------");
     }
+
+
 }
