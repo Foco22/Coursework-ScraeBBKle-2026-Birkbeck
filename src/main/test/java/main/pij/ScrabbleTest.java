@@ -111,6 +111,7 @@ public class ScrabbleTest {
             Cell [][] cells_board = board.getBoard();
             int[] startPos = board.getStartPosition();
             int size = board.getSize();
+            board.showBoard();
             System.out.println("Start position: (" + startPos[0] + ", " + startPos[1] + ")");
             System.out.println("Board size: " + size + "x" + size);
             System.out.println("--------------------------------------");
