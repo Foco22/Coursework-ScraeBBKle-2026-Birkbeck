@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import main.pij.model.Tile;
 import main.pij.model.Bag;
 import main.pij.model.Cell;
+import main.pij.model.Board;
 
 import java.util.List;
 
@@ -87,5 +88,15 @@ public class ScrabbleTest {
         System.out.println("Cell toString output: " + cell.toString());
         System.out.println("--------------------------------------");
         assertEquals("B", cell.toString());
+    }
+
+    @Test
+    public void testBoardCreation() {
+        System.out.println("testBoardCreation");
+        Board board = new Board(15);
+        System.out.println("Created board of size: 15x15");
+        System.out.println(board);
+        System.out.println("--------------------------------------");
+        assertNotNull(board);
     }
 }

@@ -1,3 +1,4 @@
+# First command
 javac -d out/production $(find src/main/pij -name "*.java")                                                                                             
                                                                                                                                                           
 # Compilar todos los tests                                                                                                                              
