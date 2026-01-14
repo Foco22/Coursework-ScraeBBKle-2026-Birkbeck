@@ -166,7 +166,7 @@ public class Board {
         // Second : Print each row with row number
         for (int row = 0; row < rows; row++) {
             System.out.printf("%2d ", row + 1);
-            for (int col = 0; col < rows; col++) {
+            for (int col = 0; col < columns; col++) {
                 System.out.printf("%4s", board[row][col].toString());
             }
             System.out.println();
