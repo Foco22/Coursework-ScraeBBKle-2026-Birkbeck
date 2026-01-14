@@ -49,6 +49,8 @@ public class Board {
             }
         }
     }
+
+
     /**
      * Load board configuration from file.
      */
@@ -66,15 +68,13 @@ public class Board {
         if (lines.size() >= 3) {
             this.columns = Integer.parseInt(lines.get(0).trim());
             this.rows = Integer.parseInt(lines.get(1).trim());
+            validateDimensions(columns, rows);  // Validar dimensiones
             this.startPosition = parseStartPosition(lines.get(2).trim());
             System.out.println("Start position parsed:" + startPosition[0] + "," + startPosition[1]);
 
             this.board = new Cell[rows][columns];
             initializeBoard();
         }   
-        
-        
-
     
         // Parse board data starting from line 3
         int rowIndex = 0;
@@ -140,6 +140,25 @@ public class Board {
         }
     }
 
+    /**
+     * Validate the size of the board.
+     */
+    private void validateDimensions(int cols, int rowCount) {
+            if (cols < MIN_COLUMNS || cols > MAX_COLUMNS) {
+                throw new IllegalArgumentException(
+                    "Columns must be between " + MIN_COLUMNS + " and " + MAX_COLUMNS + ", got: " + cols);
+            }
+            if (rowCount < MIN_ROWS || rowCount > MAX_ROWS) {
+                throw new IllegalArgumentException(
+                    "Rows must be between " + MIN_ROWS + " and " + MAX_ROWS + ", got: " + rowCount);
+            }
+            if (cols * rowCount < MIN_SQUARES) {
+                throw new IllegalArgumentException(
+                    "Board must have at least " + MIN_SQUARES + " squares, got: " + (cols * rowCount));
+            }
+    }
+
+        
     // Get the board
     public Cell[][] getBoard() {
         return board;
