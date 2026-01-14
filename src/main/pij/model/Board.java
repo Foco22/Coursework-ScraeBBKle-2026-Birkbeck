@@ -125,16 +125,17 @@ public class Board {
 
     /**
      * Show the board in the console.
-     */
+    */
     public void showBoard() {
-        // Print column headers (a, b, c, ...)
+
+        // First : Print column headers (a, b, c, ...) 
         System.out.print("   ");
         for (int col = 0; col < size; col++) {
             System.out.printf("%4c", (char)('a' + col));
         }
         System.out.println();
 
-        // Print each row with row number
+        // Second : Print each row with row number
         for (int row = 0; row < size; row++) {
             System.out.printf("%2d ", row + 1);
             for (int col = 0; col < size; col++) {
