@@ -114,4 +114,14 @@ public class Board {
         return board;
     }
 
+    // Get the start position
+    public int[] getStartPosition() {
+        return startPosition;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+
 }
