@@ -41,4 +41,9 @@ public class Player {
         return type == 'c';
     }
 
+    public void addScore(int points) {
+        this.score += points;
+    }
+
+
 }
