@@ -111,12 +111,8 @@ public class ScrabbleTest {
             System.out.println(board);
             Cell [][] cells_board = board.getBoard();
             int[] startPos = board.getStartPosition();
-            int size = board.getSize();
             board.showBoard();
             System.out.println("Start position: (" + startPos[0] + ", " + startPos[1] + ")");
-            System.out.println("Board size: " + size + "x" + size);
-            System.out.println("--------------------------------------");
-            assertEquals(15, size); // Check board size
         } catch (Exception e) {
             fail("Exception error: " + e.getMessage());
         }

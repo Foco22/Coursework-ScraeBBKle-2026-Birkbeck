@@ -12,7 +12,7 @@ import java.util.List;
 public class Board {
     private int columns; // M: 7-26
     private int rows;    // N: 10-99
-    private final Cell[][] board;
+        private Cell[][] board;
     private int[] startPosition;
 
     // Validation constants
@@ -23,17 +23,32 @@ public class Board {
     private static final int MIN_SQUARES = 192;
     
     public Board(int size) {
-        this.size = size;
-        this.board = new Cell[size][size];
+        this.columns = 0;
+        this.rows = 0;
+        this.board = null;
+        this.startPosition = null;
+    }
 
-        // Initialize the board with empty cells
-        for (int row = 0; row < size; row++) {
-            for (int col = 0; col < size; col++) {
+    /**
+     * Create a board with specified dimensions.
+     */
+    public Board(int columns, int rows) {
+        this.columns = columns;
+        this.rows = rows;
+        this.board = new Cell[rows][columns];
+        initializeBoard();
+    }
+
+    /**
+     * Initialize all cells with default values.
+     */
+    private void initializeBoard() {
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < columns; col++) {
                 board[row][col] = new Cell();
             }
         }
     }
-
     /**
      * Load board configuration from file.
      */
@@ -60,7 +75,7 @@ public class Board {
             if (line.isEmpty()) {
                 continue;
             }
-            if (rowIndex >= size) {
+            if (rowIndex >= rows) {
                 break;
             }
             parseRow(line, rowIndex);
@@ -89,7 +104,7 @@ public class Board {
         int col = 0;
         int i = 0;
 
-        while (i < line.length() && col < size) {
+        while (i < line.length() && col < columns) {
             char c = line.charAt(i);
 
             if (c == '.') {
@@ -127,9 +142,6 @@ public class Board {
         return startPosition;
     }
 
-    public int getSize() {
-        return size;
-    }
 
     /**
      * Show the board in the console.
@@ -138,15 +150,15 @@ public class Board {
 
         // First : Print column headers (a, b, c, ...) 
         System.out.print("   ");
-        for (int col = 0; col < size; col++) {
+        for (int col = 0; col < columns; col++) {
             System.out.printf("%4c", (char)('a' + col));
         }
         System.out.println();
 
         // Second : Print each row with row number
-        for (int row = 0; row < size; row++) {
+        for (int row = 0; row < rows; row++) {
             System.out.printf("%2d ", row + 1);
-            for (int col = 0; col < size; col++) {
+            for (int col = 0; col < rows; col++) {
                 System.out.printf("%4s", board[row][col].toString());
             }
             System.out.println();
