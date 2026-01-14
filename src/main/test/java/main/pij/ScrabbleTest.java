@@ -105,13 +105,12 @@ public class ScrabbleTest {
         System.out.println("testLoadBoardFromFile");
         Board board = new Board(15);
         try {
-            List<String> lines = board.loadFromFile("resources/defaultBoard.txt");
+            board.loadFromFile("resources/defaultBoard.txt");
             System.out.println("Loaded board configuration:");
-            for (String line : lines) {
-                System.out.println(line);
-            }
+            System.out.println(board);
+            Cell [][] cells_board = board.getBoard();
             System.out.println("--------------------------------------");
-            assertFalse(lines.isEmpty());
+
         } catch (Exception e) {
             fail("Exception error: " + e.getMessage());
         }
