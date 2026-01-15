@@ -62,7 +62,20 @@ public class Main {
         }
 
         // Show the board
-        board.showBoard();
+        // board.showBoard();
+        
+        //  Players 
+        System.out.print("Player 1 - Enter 'h' for human or 'c' for computer: ");
+        char player1Type = scanner.nextLine().trim().toLowerCase().charAt(0);
+        Player player1 = new Player(player1Type);
+        
+        System.out.print("Player 2 - Enter 'h' for human or 'c' for computer: ");
+        char player2Type = scanner.nextLine().trim().toLowerCase().charAt(0);
+        Player player2 = new Player(player2Type);
+
+            // 3. Game type
+        System.out.print("Would you like to play an _o_pen or a _c_losed game? ");
+        String gameType = scanner.nextLine().trim().toLowerCase();
     }
 
 
