@@ -110,6 +110,8 @@ public class Main {
             System.out.println(currentPlayer);
             System.out.println(otherPlayer);
             
+            String RackFormatted = player2.getRackFormatted();
+            System.out.print(RackFormatted);
             gameRunning = false;
 
         }

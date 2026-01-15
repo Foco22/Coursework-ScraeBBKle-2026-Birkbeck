@@ -77,6 +77,21 @@ public class Player {
         System.out.println();
     }
 
+    /**
+     * Get rack formatted as [L#], [L#], ... like [E2], [N1]
+     */
+    public String getRackFormatted() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < rack.size(); i++) {
+            Tile tile = rack.get(i);
+            sb.append("[").append(tile.getLetter()).append(tile.getValue()).append("]");
+            if (i < rack.size() - 1) {
+                sb.append(", ");
+            }
+        }
+        return sb.toString();
+    }
+
     @Override
     public String toString() {
         String typeStr = (type == 'h') ? "Human" : "Computer";

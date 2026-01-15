@@ -37,5 +37,10 @@ public class GameManager {
         return turn + 1;
     }
 
+    // Get other player
+    public Player getOtherPlayer() {
+        return turn == 0 ? player2 : player1;
+    }
+
 
 }
