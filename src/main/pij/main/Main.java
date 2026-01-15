@@ -3,6 +3,7 @@ package main.pij.main;
 import main.pij.model.Board;
 import main.pij.model.Bag;
 import main.pij.model.Player;
+import main.pij.service.GameManager;
 
 import java.util.Map;
 import java.util.Scanner;
@@ -81,7 +82,10 @@ public class Main {
         Bag bag = new Bag();
         player1.initialDraw(bag);
         player2.initialDraw(bag);
-        
+
+        // Create game manager
+        GameManager game = new GameManager(board, player1, player2, bag, gameType);
+
         
 
 
