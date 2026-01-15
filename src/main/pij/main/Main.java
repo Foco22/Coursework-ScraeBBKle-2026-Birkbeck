@@ -107,11 +107,7 @@ public class Main {
             Player currentPlayer = game.getCurrentPlayer();
             Player otherPlayer = (currentPlayerNum == 1) ? player2 : player1;
 
-            System.out.println(currentPlayer);
-            System.out.println(otherPlayer);
-            
-            String RackFormatted = player2.getRackFormatted();
-            System.out.print(RackFormatted);
+            game.showTurnInfo();
             gameRunning = false;
 
         }

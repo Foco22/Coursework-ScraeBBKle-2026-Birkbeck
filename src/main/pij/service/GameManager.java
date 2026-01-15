@@ -42,5 +42,20 @@ public class GameManager {
         return turn == 0 ? player2 : player1;
     }
 
+    /**
+     * Show turn information at the start of each turn.
+     */
+    public void showTurnInfo() {
+        Player current = getCurrentPlayer();
+        Player other = getOtherPlayer();
+
+        // If open game, show opponent's tiles
+        if (gameType.equals("o")) {
+            System.out.println("OPEN GAME: Player " + other.getPlayerNumber() + "'s tiles:");
+            System.out.println("OPEN GAME: " + other.getRackFormatted());
+        }
+
+
+    }
 
 }
