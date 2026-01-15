@@ -4,6 +4,8 @@ import main.pij.model.Board;
 import main.pij.model.Bag;
 import main.pij.model.Player;
 
+import java.util.Scanner;
+
 /**
  * Manages the Scrabble game flow.
  */
@@ -68,7 +70,34 @@ public class GameManager {
        System.out.println("are wildcards.");
        System.out.println("Entering \",\" passes the turn.");
 
-       
     }
+
+    /**
+     * Get player move input from console.
+     */
+    public String[] getPlayerInput(Scanner scanner) {
+        System.out.print("> ");
+        String input = scanner.nextLine().trim();
+
+        // Check for pass (just comma)
+        if (input.equals(",")) {
+            return new String[]{null, null};  // Pass turn
+        }
+
+        // Parse word and position
+        String[] parts = input.split(",");
+        if (parts.length != 2) {
+            System.out.println("Invalid format. Use: word,square (e.g., RUN,d7)");
+            return new String[]{"", ""};  // Invalid input
+        }
+
+        String word = parts[0].trim();
+        String position = parts[1].trim();
+
+        return new String[]{word, position};
+    }
+
+    
+
 
 }

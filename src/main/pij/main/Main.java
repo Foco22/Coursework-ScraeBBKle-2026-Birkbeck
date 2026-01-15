@@ -111,16 +111,12 @@ public class Main {
             Player otherPlayer = (currentPlayerNum == 1) ? player2 : player1;
 
             game.showTurnInfo();
-
+            String[] input = game.getPlayerInput(scanner);
+            System.out.println(input);
             gameRunning = false;
 
         }
-
-
-
     }
-
-
 
     public static void main(String[] args) {
         Main main = new Main();
