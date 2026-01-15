@@ -23,12 +23,14 @@ public class Main {
 
         // 1. Board choice
         System.out.println("Would you like to _l_oad a board or use the _d_efault board?");
-        String boardChoice = scanner.nextLine().trim().toLowerCase();
+        // String boardChoice = scanner.nextLine().trim().toLowerCase();
+        String boardChoice = String.valueOf('l');
 
         Board board;
         if (boardChoice.equals("l")) {
             System.out.println("Enter the filename to load the board from (in resources/):");
-            String filename = scanner.nextLine().trim();
+            // String filename = scanner.nextLine().trim();
+            String filename = "defaultBoard";
 
             // Add .txt extension if not provided
             if (!filename.endsWith(".txt")) {
@@ -67,16 +69,19 @@ public class Main {
         
         //  Players 
         System.out.print("Player 1 - Enter 'h' for human or 'c' for computer: ");
-        char player1Type = scanner.nextLine().trim().toLowerCase().charAt(0);
+        // char player1Type = scanner.nextLine().trim().toLowerCase().charAt(0);
+        char player1Type = 'h';
         Player player1 = new Player(player1Type);
         
         System.out.print("Player 2 - Enter 'h' for human or 'c' for computer: ");
-        char player2Type = scanner.nextLine().trim().toLowerCase().charAt(0);
+        //char player2Type = scanner.nextLine().trim().toLowerCase().charAt(0);
+        char player2Type = 'h';
         Player player2 = new Player(player2Type);
 
         // 3. Game type (it is still not used the class, but we prepare the input)
         System.out.print("Would you like to play an _o_pen or a _c_losed game? ");
-        String gameType = scanner.nextLine().trim().toLowerCase();
+        // String gameType = scanner.nextLine().trim().toLowerCase();
+        String gameType = String.valueOf('l');
 
         // 4. Initialize bag and draw tiles
         Bag bag = new Bag();
@@ -93,7 +98,16 @@ public class Main {
         // Show the start position
         System.out.println("Start position: " + board.getStartPositionAsString());
 
-        
+        // let set the condiction to stop the game
+        int skipTurnPlayer1 = 0;
+        int skipTurnPlayer2 = 0;
+        boolean gameRunning = true;
+
+        while (gameRunning) {
+
+
+
+        }
 
 
 
