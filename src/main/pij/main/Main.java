@@ -86,6 +86,13 @@ public class Main {
         // Create game manager
         GameManager game = new GameManager(board, player1, player2, bag, gameType);
 
+
+        // Show the board
+        board.showBoard();
+        
+        // Show the start position
+        System.out.println("Start position: " + board.getStartPositionAsString());
+
         
 
 

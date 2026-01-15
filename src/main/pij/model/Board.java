@@ -169,6 +169,26 @@ public class Board {
         return startPosition;
     }
 
+    /**
+     * Convert row and column indices to position string like "d7".
+     */
+    public String indicesToPosition(int row, int col) {
+        // convert 0-based indices to position string, it is eaiser way to get the values
+        char colLetter = (char) ('a' + col);
+        int rowNumber = row + 1;
+        return "" + colLetter + rowNumber;
+    }
+
+    /**
+     * Get start position as string like "d7".
+     */
+    public String getStartPositionAsString() {
+        if (startPosition == null) {
+            return null;
+        }
+        return indicesToPosition(startPosition[0], startPosition[1]);
+    }
+
 
     /**
      * Show the board in the console.
