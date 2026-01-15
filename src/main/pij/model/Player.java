@@ -7,14 +7,20 @@ import java.util.List;
  * Represents a player in the Scrabble game.It can be Human or Computer
  */
 public class Player {
+    private final int playerNumber; // 1 or 2
     private final char type; // 'h' for human, 'c' for computer
     private int score;
     private List<Tile> rack;
 
-    public Player(char type) {
+    public Player(int playerNumber, char type) {
+        this.playerNumber = playerNumber;
         this.type = type;
         this.score = 0;
         this.rack = new ArrayList<>();
+    }
+
+    public int getPlayerNumber() {
+        return playerNumber;
     }
 
     /**
@@ -74,6 +80,6 @@ public class Player {
     @Override
     public String toString() {
         String typeStr = (type == 'h') ? "Human" : "Computer";
-        return typeStr + " Player";
+        return "Player " + playerNumber + " (" + typeStr + ")";
     }
 }

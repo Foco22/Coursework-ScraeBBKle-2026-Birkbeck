@@ -122,7 +122,7 @@ public class ScrabbleTest {
     public void testPlayerInitialDraw() {
         System.out.println("testPlayerInitialDraw");
         Bag bag = new Bag();
-        Player player = new Player('h'); // 'h' for human player
+        Player player = new Player(1,   'h'); // 'h' for human player
         player.initialDraw(bag);
         List<Tile> rack = player.getRack();
         int rackSize = player.countTilesInRack();
