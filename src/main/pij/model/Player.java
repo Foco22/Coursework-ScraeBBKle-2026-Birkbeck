@@ -32,6 +32,16 @@ public class Player {
     }
 
     /**
+     * Set dummy rack for testing (RUN tiles).
+     */
+    public void setDummyRack() {
+        rack.clear();
+        rack.add(new Tile('R', 1));
+        rack.add(new Tile('U', 1));
+        rack.add(new Tile('N', 1));
+    }
+
+    /**
      * Draw tiles to refill rack to 7 tiles.
      */
     public void refillRack(Bag bag) {

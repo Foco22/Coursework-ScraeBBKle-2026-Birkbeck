@@ -67,6 +67,8 @@ public class GameManager {
        System.out.println("In the word, upper-case letters are standard tiles and lower-case letters");
        System.out.println("are wildcards.");
        System.out.println("Entering \",\" passes the turn.");
+
+       
     }
 
 }
