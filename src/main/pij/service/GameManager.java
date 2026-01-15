@@ -55,7 +55,18 @@ public class GameManager {
             System.out.println("OPEN GAME: " + other.getRackFormatted());
         }
 
+       // Show current player's turn and tiles
+       System.out.println("It's your turn, Player " + current.getPlayerNumber() + "! Your tiles:");
+       System.out.println(current.getRackFormatted());
 
+       // Show move instructions
+       System.out.println("Please enter your move in the format: \"word,square\" (without the quotes)");
+       System.out.println("For example, for suitable tile rack and board configuration, a downward move");
+       System.out.println("could be \"HI,f4\" and a rightward move could be \"HI,4f\".");
+       System.out.println();
+       System.out.println("In the word, upper-case letters are standard tiles and lower-case letters");
+       System.out.println("are wildcards.");
+       System.out.println("Entering \",\" passes the turn.");
     }
 
 }
