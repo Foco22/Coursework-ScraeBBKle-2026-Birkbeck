@@ -85,8 +85,11 @@ public class Main {
 
         // 4. Initialize bag and draw tiles
         Bag bag = new Bag();
-        player1.initialDraw(bag);
-        player2.initialDraw(bag);
+        //player1.initialDraw(bag);
+        //player2.initialDraw(bag);
+        player1.setDummyRack();
+        player2.setDummyRack();
+
 
         // Create game manager
         GameManager game = new GameManager(board, player1, player2, bag, gameType);
@@ -108,6 +111,7 @@ public class Main {
             Player otherPlayer = (currentPlayerNum == 1) ? player2 : player1;
 
             game.showTurnInfo();
+
             gameRunning = false;
 
         }
