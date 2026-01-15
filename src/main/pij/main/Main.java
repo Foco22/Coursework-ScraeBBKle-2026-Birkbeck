@@ -81,7 +81,7 @@ public class Main {
         // 3. Game type (it is still not used the class, but we prepare the input)
         System.out.print("Would you like to play an _o_pen or a _c_losed game? ");
         // String gameType = scanner.nextLine().trim().toLowerCase();
-        String gameType = String.valueOf('l');
+        String gameType = String.valueOf('o');
 
         // 4. Initialize bag and draw tiles
         Bag bag = new Bag();
@@ -90,7 +90,6 @@ public class Main {
 
         // Create game manager
         GameManager game = new GameManager(board, player1, player2, bag, gameType);
-
 
         // Show the board
         board.showBoard();
