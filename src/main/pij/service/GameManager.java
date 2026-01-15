@@ -91,6 +91,7 @@ public class GameManager {
             return new String[]{"", ""};  // Invalid input
         }
 
+
         String word = parts[0].trim();
         String position = parts[1].trim();
 

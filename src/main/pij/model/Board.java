@@ -4,7 +4,9 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Represents the Scrabble game board.
@@ -134,6 +136,11 @@ public class Board {
                 board[rowIndex][col] = new Cell('.', mult, 0);
                 col++;
                 i = endIndex + 1;
+            } else if (Character.isLetter(c)) {
+                // Letter on the board (A-Z)
+                board[rowIndex][col] = new Cell(Character.toUpperCase(c), 0, 0);
+                col++;
+                i++;
             } else {
                 i++;
             }
@@ -210,5 +217,38 @@ public class Board {
             }
             System.out.println();
         }
+    }
+
+    /**
+     * Get all words on the board (horizontal and vertical).
+     * Returns a Map with word as key and count as value.
+     * Only words with 2+ letters are counted.
+     */
+    public Map<String, Integer> getAllWordsOnBoard() {
+        Map<String, Integer> words = new HashMap<>();
+
+        // Scan horizontal words (left to right)
+        for (int row = 0; row < rows; row++) {
+            String currentWord = "";
+            // current words
+            for (int col = 0; col < columns; col++) {
+                char letter = board[row][col].getLetter();
+                // get the letter of the board in this position
+                if (letter != '.') {
+                    currentWord += letter;
+                } else {
+                    if (currentWord.length() >= 2) {
+                        // if the word is more than >2 length, it is a word, and add it to the Map Diccionary.                        
+                        words.put(currentWord, words.getOrDefault(currentWord, 0) + 1);
+                    }
+                    currentWord = "";
+                }
+            }
+            // Check end of row
+            if (currentWord.length() >= 2) {
+                words.put(currentWord, words.getOrDefault(currentWord, 0) + 1);
+            }
+        }
+        return words;
     }
 }

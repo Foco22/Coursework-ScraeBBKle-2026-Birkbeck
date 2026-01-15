@@ -111,10 +111,18 @@ public class Main {
             Player otherPlayer = (currentPlayerNum == 1) ? player2 : player1;
 
             game.showTurnInfo();
+
             String[] input = game.getPlayerInput(scanner);
             System.out.println(input);
             gameRunning = false;
 
+            // 1- First Step: Check the words in the board before the movement of the player. 
+            // I need to compare the begining state of tha board with the last state.
+            Map<String, Integer> MapWordBefore = board.getAllWordsOnBoard();
+            System.out.print(MapWordBefore);
+            for (Map.Entry<String, Integer> entry : MapWordBefore.entrySet()) {                                                                                    
+                System.out.println(entry.getKey() + " -> " + entry.getValue());                                                                                       
+            }    
         }
     }
 
