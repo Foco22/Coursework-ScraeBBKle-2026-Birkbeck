@@ -77,7 +77,13 @@ public class Main {
         System.out.print("Would you like to play an _o_pen or a _c_losed game? ");
         String gameType = scanner.nextLine().trim().toLowerCase();
 
+        // 4. Initialize bag and draw tiles
+        Bag bag = new Bag();
+        player1.initialDraw(bag);
+        player2.initialDraw(bag);
         
+        
+
 
 
     }
