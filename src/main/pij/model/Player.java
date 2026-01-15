@@ -71,5 +71,9 @@ public class Player {
         System.out.println();
     }
 
-
+    @Override
+    public String toString() {
+        String typeStr = (type == 'h') ? "Human" : "Computer";
+        return typeStr + " Player";
+    }
 }

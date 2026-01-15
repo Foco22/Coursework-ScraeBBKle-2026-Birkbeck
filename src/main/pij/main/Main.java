@@ -103,8 +103,14 @@ public class Main {
         boolean gameRunning = true;
 
         while (gameRunning) {
+            int currentPlayerNum = game.getCurrentPlayerNumber();
+            Player currentPlayer = game.getCurrentPlayer();
+            Player otherPlayer = (currentPlayerNum == 1) ? player2 : player1;
 
-
+            System.out.println(currentPlayer);
+            System.out.println(otherPlayer);
+            
+            gameRunning = false;
 
         }
 

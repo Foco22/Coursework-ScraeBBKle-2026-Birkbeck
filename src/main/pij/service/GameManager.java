@@ -27,8 +27,15 @@ public class GameManager {
         this.countTurns = 0;
     }
 
-    // Get current player (0 or 1)
-    public int getTurn() {
-        return turn;
-    } 
+    // Get current player object
+    public Player getCurrentPlayer() {
+        return turn == 0 ? player1 : player2;
+    }
+
+    // Get current player number (1 or 2)
+    public int getCurrentPlayerNumber() {
+        return turn + 1;
+    }
+
+
 }
