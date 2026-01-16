@@ -137,18 +137,18 @@ public class GameManager {
     }
 
 
-    public int scoreWord(Board board, WordCells wc, Set<String> newlyPlacedCells) {
+    public int scoreWord(Board board, WordCells WordCellsPlayer, Set<String> newlyPlacedCells) {
     int sum = 0;
     int wordFactor = 1;
     Cell[][] boardGame = board.getBoard();           // your Cell
 
-    for (int[] pos : wc.cells) {
+    for (int[] pos : WordCellsPlayer.cells) {
         int r = pos[0];
         int c = pos[1];
 
         Cell cell = boardGame[r][c];
         char ch = cell.getLetter();        // A-Z
-        int base = letterValue(ch);        // implement this
+        int base = bag.letterValue(ch);        // implement this
 
         boolean isNew = newlyPlacedCells.contains(r + "," + c);
 

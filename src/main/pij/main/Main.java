@@ -195,8 +195,15 @@ public class Main {
             }
 
             // 7 Step 7: Count the point if the movement was sucesseed.
+            Integer ScorePlayerTurn = game.scoreWord(board, WordCellsPlayer, newlyPlacedCells);
+            System.out.println(ScorePlayerTurn);
+            System.out.println(ScorePlayerTurn);
+            System.out.println(ScorePlayerTurn);
 
-
+            // Show the board
+            board.showBoard();
+        
+            
 
 
             // Valid move - continue to next turn

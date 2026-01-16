@@ -17,7 +17,7 @@ public class Bag {
         this.tiles = new ArrayList<>();
         // Inicialization of the bag       
         initializeTiles();
-        initializeValues();   // ✅
+        initializeValues();  
     }
     /**
      * Initialize the bag in the time 0.
