@@ -150,6 +150,11 @@ public class Main {
                 continue;
             }
 
+            // 6 Step 6: Getting the new with the movement of the player.
+            Map<String, Integer> MapWordAfter = board.getAllWordsOnBoard();
+
+            System.out.println(MapWordBefore);
+            System.out.println(MapWordAfter);
 
 
             // Valid move - continue to next turn
