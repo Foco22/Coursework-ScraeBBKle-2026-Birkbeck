@@ -361,7 +361,6 @@ public class Board {
             isHorizontal = true;
         }
 
-        // Build the word by reading consecutive letters
         String word = "";
         int currentRow = row;
         int currentCol = col;
@@ -369,18 +368,17 @@ public class Board {
         while (currentRow >= 0 && currentRow < rows && currentCol >= 0 && currentCol < columns) {
             char letter = board[currentRow][currentCol].getLetter();
             if (letter == '.') {
-                break;  // Stop at empty cell
+                break;  // not count more the word
             }
             word += letter;
 
-            // Move to next cell
+            // Next move to the board, if it is horizontal or vertical
             if (isHorizontal) {
                 currentCol++;
             } else {
                 currentRow++;
             }
         }
-
         return word;
     }
 }
