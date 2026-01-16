@@ -200,6 +200,8 @@ public class Main {
             System.out.println(ScorePlayerTurn);
             System.out.println(ScorePlayerTurn);
             currentPlayer.addScore(ScorePlayerTurn);
+            currentPlayer.refillRack(bag);
+            
 
 
             // Valid move - continue to next turn
