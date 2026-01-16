@@ -3,7 +3,11 @@ package main.pij.service;
 import main.pij.model.Board;
 import main.pij.model.Bag;
 import main.pij.model.Player;
+import main.pij.model.WordList;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 /**
@@ -98,7 +102,15 @@ public class GameManager {
         return new String[]{word, position};
     }
 
-    
-
-
+    /**
+     * Checks if all words on the board are valid.
+     */
+    public boolean areAllWordsValid(Map<String, Integer> wordsOnBoard) {
+        for (String word : wordsOnBoard.keySet()) {
+            if (!WordList.isValidWord(word)) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
