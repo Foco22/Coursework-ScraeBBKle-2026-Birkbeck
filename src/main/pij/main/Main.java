@@ -51,7 +51,6 @@ public class Main {
                 board = new Board(0);
                 board.loadFromFile(filename);
             } catch (Exception e) {
-                System.out.println("Error loading board from file: " + e.getMessage());
                 System.out.println("Using default board instead.");
                 board = new Board(0);
                 try {
@@ -127,7 +126,6 @@ public class Main {
             game.showTurnInfo();
 
             String[] input = game.getPlayerInput(scanner);
-            System.out.println(input);
 
             // 1- Step 1: Check the words in the board before the movement of the player. 
             // I need to compare the begining state of tha board with the last state.
@@ -151,11 +149,7 @@ public class Main {
             // It was created this method to copy the information of the cell that really were changed in this movement, as example: 
             // IF the movement was SNOWS, but the WORD SNOW was before, i need to get only the S.
             Set<String> newlyPlacedCells = new HashSet<>();
-            System.out.println(newlyPlacedCells);
             boolean CheckPlaceWord = board.placeWord(word, position, StartPosition, countTurns,newlyPlacedCells);
-            System.out.println(newlyPlacedCells);
-            System.out.println("------------------------------------------------------------");
-            System.out.println("------------------------------------------------------------");
 
             if (!CheckPlaceWord) {
                 // Invalid words - keep same player's turn
@@ -166,16 +160,9 @@ public class Main {
             WordCells WordCellsPlayer = board.getWordAt(position);
             String WordPlayer = WordCellsPlayer.word;
             List<int[]> WordPlayerCells = WordCellsPlayer.cells;
-            System.out.println("Word Player" + WordPlayer);
-            System.out.println("WordPlayerCells" + WordPlayerCells);
         
-            for (int[] cell : WordPlayerCells) {
-                System.out.println("(" + cell[0] + ", " + cell[1] + ")");
-            }
-
             // 5 Step 5: Check if the word generate is validate in the WordList.
             boolean CheckWordPlayer = WordList.isValidWord(WordPlayer);
-            System.out.println(CheckWordPlayer);
             if (!CheckWordPlayer) {
                 // Invalid words - keep same player's turn
                 game.showInvalidMoveMessage(input[0], input[1]);
@@ -184,10 +171,6 @@ public class Main {
 
             // 6 Step 6: Getting the new with the movement of the player.
             Map<String, Integer> MapWordAfter = board.getAllWordsOnBoard();
-
-            System.out.println(MapWordBefore);
-            System.out.println(MapWordAfter);
-
             boolean ValidatedMovement = board.isValidMove(MapWordBefore, MapWordAfter);
             if (!ValidatedMovement) {
                 // First - Restorate the movement 
@@ -200,9 +183,6 @@ public class Main {
 
             // 7 Step 7: Count the point if the movement was sucesseed.
             Integer ScorePlayerTurn = game.scoreWord(board, WordCellsPlayer, newlyPlacedCells);
-            System.out.println(ScorePlayerTurn);
-            System.out.println(ScorePlayerTurn);
-            System.out.println(ScorePlayerTurn);
             currentPlayer.addScore(ScorePlayerTurn);
             currentPlayer.refillRack(bag);      
             

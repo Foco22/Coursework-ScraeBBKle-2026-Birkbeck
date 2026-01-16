@@ -25,9 +25,6 @@ public class WordList {
         }
     }
     public static boolean isValidWord(String word) {
-        System.out.println(word.toLowerCase());
-        System.out.println("--------------------");
-        
         return words.contains(word.toLowerCase());
     }   
 }    
