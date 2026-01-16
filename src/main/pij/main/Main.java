@@ -117,7 +117,12 @@ public class Main {
         while (gameRunning) {
             int currentPlayerNum = game.getCurrentPlayerNumber();
             Player currentPlayer = game.getCurrentPlayer();
+            int countTurns = game.GentCountTurn();
             Player otherPlayer = (currentPlayerNum == 1) ? player2 : player1;
+
+            if (countTurns != 0){
+                board.showBoard();
+            }
 
             game.showTurnInfo();
 
@@ -138,7 +143,6 @@ public class Main {
             }
 
             // 3 Step 3: Put the word in the board and get if the word is in the start position for the turn 0
-            int countTurns = game.GentCountTurn();
             int[] StartPosition = board.getStartPosition();
 
             String word = input[0];
@@ -214,7 +218,9 @@ public class Main {
             }
             
             // Valid move - continue to next turn
-            gameRunning = false;
+            game.nextTurn();
+            
+            // gameRunning = false;
             
         }
     }

@@ -170,4 +170,8 @@ public class GameManager {
     return sum * wordFactor;
 
     }
+    public void nextTurn() {
+        turn = 1 - turn;     // Change the turnn to 0 a 1
+        countTurns++;        // Add Count the turn
+    }
 }
