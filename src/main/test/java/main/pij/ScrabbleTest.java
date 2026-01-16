@@ -138,8 +138,11 @@ public class ScrabbleTest {
     public void testWordList() {
         System.out.println("testLoadWordList");
         WordList.loadWords();
+        boolean wordIsList = WordList.isValidWord("RUN");
+        System.out.println(wordIsList);
+        assertEquals(true, wordIsList); // Check board size
         System.out.println("--------------------------------------");
     }
-    
+
 
 }

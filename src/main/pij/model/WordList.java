@@ -1,8 +1,7 @@
 package main.pij.model;                                                                                                                                                                                                                                                                                               
 import java.io.*;                                                                                                                                         
 import java.util.HashSet;                                                                                                                                 
-import java.util.Set;                                                                                                                                     
-                                                                                                                                                        
+import java.util.Set;
 
 public class WordList {
     private static final String DEFAULT_WORDLIST = "resources/wordlist.txt";
@@ -25,5 +24,7 @@ public class WordList {
             System.out.println("Error loading wordlist: " + e.getMessage());
         }
     }
-
+    public static boolean isValidWord(String word) {
+        return words.contains(word.toLowerCase());
+    }   
 }    
