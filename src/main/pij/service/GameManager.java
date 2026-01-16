@@ -174,4 +174,13 @@ public class GameManager {
         turn = 1 - turn;     // Change the turnn to 0 a 1
         countTurns++;        // Add Count the turn
     }
+    public void showMoveResult(String word, String position, int points) {
+        System.out.println();
+        System.out.println("The move is: Letters: " + word.toUpperCase() + " at position " + position);
+        System.out.println("Points this turn: " + points);
+        System.out.println("Player 1 score: " + player1.getScore());
+        System.out.println("Player 2 score: " + player2.getScore());
+        System.out.println();
+    }
+    
 }

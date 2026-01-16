@@ -204,9 +204,12 @@ public class Main {
             System.out.println(ScorePlayerTurn);
             System.out.println(ScorePlayerTurn);
             currentPlayer.addScore(ScorePlayerTurn);
-            currentPlayer.refillRack(bag);            
+            currentPlayer.refillRack(bag);      
+            
+            // 8 Step 8: Show the results and the movement.
+            game.showMoveResult(WordPlayer, position, ScorePlayerTurn);
 
-            // 8 Step 8: Condition of finishing the game or going to the next player.
+            // 9 Step 9: Condition of finishing the game or going to the next player.
             // If the bag is empty and one of the player has a empty rack.
             if (bag.isEmpty() && (player1.countTilesInRack() == 0 || player2.countTilesInRack() == 0)) {
                 System.out.println("Game over: bag is empty and a player has an empty rack.");
