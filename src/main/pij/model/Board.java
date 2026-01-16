@@ -249,6 +249,30 @@ public class Board {
                 words.put(currentWord, words.getOrDefault(currentWord, 0) + 1);
             }
         }
+
+        // Scan the vertical words (top to down)
+        for (int column = 0; column < columns; column++) {
+            String currentWord = "";
+            // current words
+            for (int row = 0; row < rows; row++) {
+                char letter = board[row][column].getLetter();
+                // get the letter of the board in this position
+                if (letter != '.') {
+                    currentWord += letter;
+                } else {
+                    if (currentWord.length() >= 2) {
+                        // if the word is more than >2 length, it is a word, and add it to the Map Diccionary.                        
+                        words.put(currentWord, words.getOrDefault(currentWord, 0) + 1);
+                    }
+                    currentWord = "";
+                }
+            }
+            // Check end of row
+            if (currentWord.length() >= 2) {
+                words.put(currentWord, words.getOrDefault(currentWord, 0) + 1);
+            }
+        }
+
         return words;
     }
 }
