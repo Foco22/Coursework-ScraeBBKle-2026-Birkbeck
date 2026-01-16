@@ -209,15 +209,8 @@ public class Main {
         Integer UnPlayedTitlePlayer1 = game.unplayedTilesValue(player1);
         Integer UnPlayedTitlePlayer2 = game.unplayedTilesValue(player2);
         player1.addScore(-UnPlayedTitlePlayer1);
-        player2.addScore(-UnPlayedTitlePlayer2);
-    
-
-        System.out.println(UnPlayedTitlePlayer1);
-        System.out.println(UnPlayedTitlePlayer2);
-        
-
-
-
+        player2.addScore(-UnPlayedTitlePlayer2);        
+        game.showFinalResult();
     }
 
     public static void main(String[] args) {

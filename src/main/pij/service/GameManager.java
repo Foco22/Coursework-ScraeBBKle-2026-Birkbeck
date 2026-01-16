@@ -193,18 +193,24 @@ public class GameManager {
         }
         return sum;
     }
+
+    // Show the final results to the game.
+    public void showFinalResult() {
+        int score1 = player1.getScore();
+        int score2 = player2.getScore();
     
-    public void applyEndGamePenalty() {
-        int p1Penalty = unplayedTilesValue(player1);
-        int p2Penalty = unplayedTilesValue(player2);
+        System.out.println("Game Over!");
+        System.out.println("Player 1 scored " + score1 + " points.");
+        System.out.println("Player 2 scored " + score2 + " points.");
     
-        player1.addScore(-p1Penalty);
-        player2.addScore(-p2Penalty);
-    
-        System.out.println();
-        System.out.println("End of game: unplayed tiles penalty applied.");
-        System.out.println("Player 1 penalty: -" + p1Penalty + " -> score: " + player1.getScore());
-        System.out.println("Player 2 penalty: -" + p2Penalty + " -> score: " + player2.getScore());
-        System.out.println();
+        if (score1 > score2) {
+            System.out.println("Player 1 wins!");
+        } else if (score2 > score1) {
+            System.out.println("Player 2 wins!");
+        } else {
+            System.out.println("It's a draw!");
+        }
     }
+    
+
 }
