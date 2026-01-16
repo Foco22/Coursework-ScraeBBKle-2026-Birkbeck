@@ -128,17 +128,8 @@ public class Main {
 
             if (!CheckWords) {
                 // Invalid words - keep same player's turn
-                String word = input[0];
-                String position = input[1];
-                System.out.println("The board does not permit word " + word + " at position " + position + ". Please try again.");
-                System.out.println("Please enter your move in the format: \"word,square\" (without the quotes)");
-                System.out.println("For example, for suitable tile rack and board configuration, a downward move");
-                System.out.println("could be \"HI,f4\" and a rightward move could be \"HI,4f\".");
-                System.out.println();
-                System.out.println("In the word, upper-case letters are standard tiles and lower-case letters");
-                System.out.println("are wildcards.");
-                System.out.println("Entering \",\" passes the turn.");
-                continue; // Stay on same player's turn
+                game.showInvalidMoveMessage(input[0], input[1]);
+                continue;
             }
 
             // Valid move - continue to next turn
