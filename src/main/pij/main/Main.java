@@ -200,10 +200,19 @@ public class Main {
             System.out.println(ScorePlayerTurn);
             System.out.println(ScorePlayerTurn);
             currentPlayer.addScore(ScorePlayerTurn);
-            currentPlayer.refillRack(bag);
+            currentPlayer.refillRack(bag);            
+
+            // 8 Step 8: Condition of finishing the game or going to the next player.
+            // If the bag is empty and one of the player has a empty rack.
+            if (bag.isEmpty() && (player1.countTilesInRack() == 0 || player2.countTilesInRack() == 0)) {
+                System.out.println("Game over: bag is empty and a player has an empty rack.");
+                break;
+            }
+            // If SkipTurn Player 2 and 1 is more than 2 for both.
+            if (skipTurnPlayer2 >= 2 && skipTurnPlayer1 >= 2) {
+                break;
+            }
             
-
-
             // Valid move - continue to next turn
             gameRunning = false;
             
