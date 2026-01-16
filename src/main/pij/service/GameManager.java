@@ -142,19 +142,6 @@ public class GameManager {
     int wordFactor = 1;
     Cell[][] boardGame = board.getBoard();           // your Cell
 
-    System.out.println("Word: " + WordCellsPlayer.word);
-
-    System.out.print("Cells: ");
-    for (int[] c : WordCellsPlayer.cells) {
-        System.out.print("(" + c[0] + "," + c[1] + ") ");
-    }
-    System.out.println();
-    
-    System.out.println("newlyPlacedCells: " + newlyPlacedCells);
-    
-    System.out.println("================================");
-
-
     for (int[] pos : WordCellsPlayer.cells) {
         int r = pos[0];
         int c = pos[1];
