@@ -114,95 +114,110 @@ public class Main {
         WordList.loadWords();
     
         while (gameRunning) {
+
             int currentPlayerNum = game.getCurrentPlayerNumber();
             Player currentPlayer = game.getCurrentPlayer();
             int countTurns = game.GentCountTurn();
             Player otherPlayer = (currentPlayerNum == 1) ? player2 : player1;
 
-            if (countTurns != 0){
-                board.showBoard(bag);
-            }
+            // Logic to a HUMAN player - I prefer to divide as to know destroy what it has been build to the human action
+            if (currentPlayer.isHuman()){
 
-            game.showTurnInfo();
-
-            String[] input = game.getPlayerInput(scanner);
-
-            // 1- Step 1: Check the words in the board before the movement of the player. 
-            // I need to compare the begining state of tha board with the last state.
-            Map<String, Integer> MapWordBefore = board.getAllWordsOnBoard();
-
-            // 2- Step 2: Validate if the words on the board are validated.
-            boolean CheckWords = game.areAllWordsValid(MapWordBefore);
-
-            if (!CheckWords) {
-                // Invalid words - keep same player's turn
-                game.showInvalidMoveMessage(input[0], input[1]);
-                continue;
-            }
-
-            // 3 Step 3: Put the word in the board and get if the word is in the start position for the turn 0
-            int[] StartPosition = board.getStartPosition();
-
-            String word = input[0];
-            String position = input[1];
-
-            // It was created this method to copy the information of the cell that really were changed in this movement, as example: 
-            // IF the movement was SNOWS, but the WORD SNOW was before, i need to get only the S.
-            Set<String> newlyPlacedCells = new HashSet<>();
-            boolean CheckPlaceWord = board.placeWord(word, position, StartPosition, countTurns,newlyPlacedCells);
-
-            if (!CheckPlaceWord) {
-                // Invalid words - keep same player's turn
-                game.showInvalidMoveMessage(input[0], input[1]);
-                continue;
-            }
-            // 4 Step 4: Get the word generate in the board.
-            WordCells WordCellsPlayer = board.getWordAt(position);
-            String WordPlayer = WordCellsPlayer.word;
-            List<int[]> WordPlayerCells = WordCellsPlayer.cells;
-        
-            // 5 Step 5: Check if the word generate is validate in the WordList.
-            boolean CheckWordPlayer = WordList.isValidWord(WordPlayer);
-            if (!CheckWordPlayer) {
-                // Invalid words - keep same player's turn
-                game.showInvalidMoveMessage(input[0], input[1]);
-                continue;
-            }
-
-            // 6 Step 6: Getting the new with the movement of the player.
-            Map<String, Integer> MapWordAfter = board.getAllWordsOnBoard();
-            boolean ValidatedMovement = board.isValidMove(MapWordBefore, MapWordAfter);
-            if (!ValidatedMovement) {
-                // First - Restorate the movement 
-                // this must be done, it is still in process. 
+                if (countTurns != 0){
+                    board.showBoard(bag);
+                }
+                game.showTurnInfo();
+    
+                String[] input = game.getPlayerInput(scanner);
+    
+                // 1- Step 1: Check the words in the board before the movement of the player. 
+                // I need to compare the begining state of tha board with the last state.
+                Map<String, Integer> MapWordBefore = board.getAllWordsOnBoard();
+    
+                // 2- Step 2: Validate if the words on the board are validated.
+                boolean CheckWords = game.areAllWordsValid(MapWordBefore);
+    
+                if (!CheckWords) {
+                    // Invalid words - keep same player's turn
+                    game.showInvalidMoveMessage(input[0], input[1]);
+                    continue;
+                }
+    
+                // 3 Step 3: Put the word in the board and get if the word is in the start position for the turn 0
+                int[] StartPosition = board.getStartPosition();
+    
+                String word = input[0];
+                String position = input[1];
+    
+                // It was created this method to copy the information of the cell that really were changed in this movement, as example: 
+                // IF the movement was SNOWS, but the WORD SNOW was before, i need to get only the S.
+                Set<String> newlyPlacedCells = new HashSet<>();
+                boolean CheckPlaceWord = board.placeWord(word, position, StartPosition, countTurns,newlyPlacedCells);
+    
+                if (!CheckPlaceWord) {
+                    // Invalid words - keep same player's turn
+                    game.showInvalidMoveMessage(input[0], input[1]);
+                    continue;
+                }
+                // 4 Step 4: Get the word generate in the board.
+                WordCells WordCellsPlayer = board.getWordAt(position);
+                String WordPlayer = WordCellsPlayer.word;
+                List<int[]> WordPlayerCells = WordCellsPlayer.cells;
+            
+                // 5 Step 5: Check if the word generate is validate in the WordList.
+                boolean CheckWordPlayer = WordList.isValidWord(WordPlayer);
+                if (!CheckWordPlayer) {
+                    // Invalid words - keep same player's turn
+                    game.showInvalidMoveMessage(input[0], input[1]);
+                    continue;
+                }
+    
+                // 6 Step 6: Getting the new with the movement of the player.
+                Map<String, Integer> MapWordAfter = board.getAllWordsOnBoard();
+                boolean ValidatedMovement = board.isValidMove(MapWordBefore, MapWordAfter);
+                if (!ValidatedMovement) {
+                    // First - Restorate the movement 
+                    // this must be done, it is still in process. 
+                    
+                    // Second - Show the information 
+                    game.showInvalidMoveMessage(input[0], input[1]);
+                    continue;
+                }
+    
+                // 7 Step 7: Count the point if the movement was sucesseed.
+                Integer ScorePlayerTurn = game.scoreWord(board, WordCellsPlayer, newlyPlacedCells);
+                currentPlayer.addScore(ScorePlayerTurn);
+                currentPlayer.refillRack(bag);      
                 
-                // Second - Show the information 
-                game.showInvalidMoveMessage(input[0], input[1]);
-                continue;
-            }
+                // 8 Step 8: Show the results and the movement.
+                game.showMoveResult(WordPlayer, position, ScorePlayerTurn);
+    
+                // 9 Step 9: Condition of finishing the game or going to the next player.
+                // If the bag is empty and one of the player has a empty rack.
+                if (bag.isEmpty() && (player1.countTilesInRack() == 0 || player2.countTilesInRack() == 0)) {
+                    System.out.println("Game over: bag is empty and a player has an empty rack.");
+                    break;
+                }
+                // If SkipTurn Player 2 and 1 is more than 2 for both.
+                if (skipTurnPlayer2 >= 2 && skipTurnPlayer1 >= 2) {
+                    break;
+                }
 
-            // 7 Step 7: Count the point if the movement was sucesseed.
-            Integer ScorePlayerTurn = game.scoreWord(board, WordCellsPlayer, newlyPlacedCells);
-            currentPlayer.addScore(ScorePlayerTurn);
-            currentPlayer.refillRack(bag);      
-            
-            // 8 Step 8: Show the results and the movement.
-            game.showMoveResult(WordPlayer, position, ScorePlayerTurn);
+                // Valid move - continue to next turn
+                game.nextTurn();            
+                gameRunning =false;
+            }   
 
-            // 9 Step 9: Condition of finishing the game or going to the next player.
-            // If the bag is empty and one of the player has a empty rack.
-            if (bag.isEmpty() && (player1.countTilesInRack() == 0 || player2.countTilesInRack() == 0)) {
-                System.out.println("Game over: bag is empty and a player has an empty rack.");
-                break;
+            // Logic to a COMPUTER player - 
+            else {
+
+
             }
-            // If SkipTurn Player 2 and 1 is more than 2 for both.
-            if (skipTurnPlayer2 >= 2 && skipTurnPlayer1 >= 2) {
-                break;
-            }
-            
-            // Valid move - continue to next turn
-            game.nextTurn();            
-            gameRunning =false;
+        
+        
+        
+        
+        
         }
 
         // 10 Step 10: Game Over.
