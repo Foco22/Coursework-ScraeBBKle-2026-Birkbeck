@@ -368,7 +368,7 @@ public class Board {
         while (currentRow >= 0 && currentRow < rows && currentCol >= 0 && currentCol < columns) {
             char letter = board[currentRow][currentCol].getLetter();
             if (letter == '.') {
-                break;  // not count more the word
+                break;  // not count more the word.
             }
             word += letter;
 
@@ -381,4 +381,47 @@ public class Board {
         }
         return word;
     }
+
+    /**
+     * Get if this is a validate movemenet after the player game his position.
+     */
+
+    public static boolean isValidMove(
+        Map<String, Integer> before,
+        Map<String, Integer> after) {
+
+    int newWords = 0;
+    int increasedWords = 0;
+
+    for (Map.Entry<String, Integer> entry : after.entrySet()) {
+        String word = entry.getKey();
+        int afterValue = entry.getValue();
+
+        if (!before.containsKey(word)) {
+            // add a new value
+            newWords++;
+        } else {
+            int beforeValue = before.get(word);
+
+            if (afterValue == beforeValue + 1) {
+                increasedWords++;
+            } else if (afterValue != beforeValue) {
+                // any other combination as 2,3,4, or more word, are no validated.
+                return false;
+            }
+        }
+    }
+
+    // if the size was less, so it not work,
+    if (before.size() > after.size()) {
+        return false;
+    }
+
+    // Onlu a new words can exists or must be a increment of 1 for a exits word. (one occurrence)
+    return (newWords == 1 && increasedWords == 0)
+        || (newWords == 0 && increasedWords == 1);
+}
+
+
+
 }

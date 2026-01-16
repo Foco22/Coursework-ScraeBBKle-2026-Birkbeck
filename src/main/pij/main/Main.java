@@ -156,6 +156,16 @@ public class Main {
             System.out.println(MapWordBefore);
             System.out.println(MapWordAfter);
 
+            boolean ValidatedMovement = board.isValidMove(MapWordBefore, MapWordAfter);
+            if (!ValidatedMovement) {
+                // First - Restorate the movement 
+                
+
+                // Second - Show the information 
+                game.showInvalidMoveMessage(input[0], input[1]);
+                continue;
+            }
+
 
             // Valid move - continue to next turn
             gameRunning = false;
