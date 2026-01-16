@@ -14,7 +14,7 @@ import java.util.Map;
 public class Board {
     private int columns; // M: 7-26
     private int rows;    // N: 10-99
-        private Cell[][] board;
+    private Cell[][] board;
     private int[] startPosition;
 
     // Validation constants
@@ -335,5 +335,52 @@ public class Board {
         }
 
         return true;
+    }
+
+    /**
+     * Get the complete word formed at a position in a direction.
+     */
+    public String getWordAt(String position) {
+        int row, col;
+        boolean isHorizontal;
+
+        // Parse position (same logic as placeWord)
+        if (Character.isLetter(position.charAt(0))) {
+            char colChar = Character.toLowerCase(position.charAt(0));
+            col = colChar - 'a';
+            row = Integer.parseInt(position.substring(1)) - 1;
+            isHorizontal = false;
+        } else {
+            int letterIndex = 0;
+            while (letterIndex < position.length() && Character.isDigit(position.charAt(letterIndex))) {
+                letterIndex++;
+            }
+            row = Integer.parseInt(position.substring(0, letterIndex)) - 1;
+            char colChar = Character.toLowerCase(position.charAt(letterIndex));
+            col = colChar - 'a';
+            isHorizontal = true;
+        }
+
+        // Build the word by reading consecutive letters
+        String word = "";
+        int currentRow = row;
+        int currentCol = col;
+
+        while (currentRow >= 0 && currentRow < rows && currentCol >= 0 && currentCol < columns) {
+            char letter = board[currentRow][currentCol].getLetter();
+            if (letter == '.') {
+                break;  // Stop at empty cell
+            }
+            word += letter;
+
+            // Move to next cell
+            if (isHorizontal) {
+                currentCol++;
+            } else {
+                currentRow++;
+            }
+        }
+
+        return word;
     }
 }

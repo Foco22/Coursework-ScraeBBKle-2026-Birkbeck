@@ -136,7 +136,12 @@ public class Main {
             String word = input[0];
             String position = input[1];
             board.placeWord(word, position);
-            board.showBoard();
+            
+            // 4 Step 4: Get the word generate in the board.
+            String WordPlayer = board.getWordAt(position);
+            System.out.println("Word Player" + WordPlayer);
+            
+
 
             // Valid move - continue to next turn
             gameRunning = false;
