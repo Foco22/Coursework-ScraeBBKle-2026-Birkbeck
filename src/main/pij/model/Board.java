@@ -221,8 +221,6 @@ public class Board {
 
     /**
      * Get all words on the board (horizontal and vertical).
-     * Returns a Map with word as key and count as value.
-     * Only words with 2+ letters are counted.
      */
     public Map<String, Integer> getAllWordsOnBoard() {
         Map<String, Integer> words = new HashMap<>();
