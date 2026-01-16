@@ -275,4 +275,65 @@ public class Board {
 
         return words;
     }
+
+    /**
+     * Place a word on the board.
+     */
+    public boolean placeWord(String word, String position) {
+        // Parse position and direction
+        // "d7" = column d, row 7, direction DOWN (letter first)
+        // "7d" = row 7, column d, direction RIGHT (number first)
+
+        int row, col;
+        boolean isHorizontal;
+
+        if (Character.isLetter(position.charAt(0))) {
+            // Letter first: "d7" = downward (vertical)
+            char colChar = Character.toLowerCase(position.charAt(0));
+            col = colChar - 'a';
+            // allow to get the row, example if d the letter, so it get the 3 in column.
+            row = Integer.parseInt(position.substring(1)) - 1;
+            isHorizontal = false;
+        } else {
+            // Number first: "7d" = rightward (horizontal)
+            int letterIndex = 0;
+            while (letterIndex < position.length() && Character.isDigit(position.charAt(letterIndex))) {
+                letterIndex++;
+            }
+            row = Integer.parseInt(position.substring(0, letterIndex)) - 1;
+            char colChar = Character.toLowerCase(position.charAt(letterIndex));
+            // allow to get the column of the d, obtian the 3 in the case of d.
+            col = colChar - 'a';
+            isHorizontal = true;
+        }
+
+        // Place each letter - skip cells that already have letters
+        int wordIndex = 0;    // Index in the input word
+        int boardOffset = 0;  // Offset on the board from starting position
+
+        while (wordIndex < word.length()) {
+            int currentRow = isHorizontal ? row : row + boardOffset;
+            int currentCol = isHorizontal ? col + boardOffset : col;
+
+            // Check bounds
+            if (currentRow < 0 || currentRow >= rows || currentCol < 0 || currentCol >= columns) {
+                return false;
+            }
+
+            // Check if cell already has a letter
+            if (!board[currentRow][currentCol].isEmpty()) {
+                // Cell has a letter - skip this board position, don't consume word letter
+                boardOffset++;
+                continue;
+            }
+
+            // Cell is empty - place the letter in the board.
+            char letter = Character.toUpperCase(word.charAt(wordIndex));
+            board[currentRow][currentCol].setLetter(letter);
+            wordIndex++;
+            boardOffset++;
+        }
+
+        return true;
+    }
 }
