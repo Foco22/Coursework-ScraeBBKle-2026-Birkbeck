@@ -8,6 +8,7 @@ import main.pij.model.Bag;
 import main.pij.model.Cell;
 import main.pij.model.Board;
 import main.pij.model.Player;
+import main.pij.model.WordList;
 
 import java.util.List;
 
@@ -133,5 +134,12 @@ public class ScrabbleTest {
         System.out.println("--------------------------------------");
     }
 
+    @Test
+    public void testWordList() {
+        System.out.println("testLoadWordList");
+        WordList.loadWords();
+        System.out.println("--------------------------------------");
+    }
+    
 
 }
