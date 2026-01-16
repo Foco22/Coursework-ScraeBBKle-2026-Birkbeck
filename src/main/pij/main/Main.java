@@ -118,7 +118,6 @@ public class Main {
 
             String[] input = game.getPlayerInput(scanner);
             System.out.println(input);
-            gameRunning = false;
 
             // 1- Step 1: Check the words in the board before the movement of the player. 
             // I need to compare the begining state of tha board with the last state.
@@ -126,13 +125,25 @@ public class Main {
 
             // 2- Step 2: Validate if the words on the board are validated.
             boolean CheckWords = game.areAllWordsValid(MapWordBefore);
-            System.out.print(CheckWords);
 
-        
-            System.out.print(MapWordBefore);
-            for (Map.Entry<String, Integer> entry : MapWordBefore.entrySet()) {                                                                                    
-                System.out.println(entry.getKey() + " -> " + entry.getValue());                                                                                       
-            }    
+            if (!CheckWords) {
+                // Invalid words - keep same player's turn
+                String word = input[0];
+                String position = input[1];
+                System.out.println("The board does not permit word " + word + " at position " + position + ". Please try again.");
+                System.out.println("Please enter your move in the format: \"word,square\" (without the quotes)");
+                System.out.println("For example, for suitable tile rack and board configuration, a downward move");
+                System.out.println("could be \"HI,f4\" and a rightward move could be \"HI,4f\".");
+                System.out.println();
+                System.out.println("In the word, upper-case letters are standard tiles and lower-case letters");
+                System.out.println("are wildcards.");
+                System.out.println("Entering \",\" passes the turn.");
+                continue; // Stay on same player's turn
+            }
+
+            // Valid move - continue to next turn
+            gameRunning = false;
+            
         }
     }
 
