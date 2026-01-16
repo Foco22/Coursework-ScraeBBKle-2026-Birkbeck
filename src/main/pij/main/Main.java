@@ -141,6 +141,15 @@ public class Main {
             String WordPlayer = board.getWordAt(position);
             System.out.println("Word Player" + WordPlayer);
             
+            // 5 Step 5: Check if the word generate is validate in the WordList.
+            boolean CheckWordPlayer = WordList.isValidWord(WordPlayer);
+            System.out.println(CheckWordPlayer);
+            if (!CheckWordPlayer) {
+                // Invalid words - keep same player's turn
+                game.showInvalidMoveMessage(input[0], input[1]);
+                continue;
+            }
+
 
 
             // Valid move - continue to next turn
