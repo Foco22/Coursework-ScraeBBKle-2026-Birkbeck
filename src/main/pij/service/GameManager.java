@@ -33,6 +33,10 @@ public class GameManager {
         this.countTurns = 0;
     }
 
+    public int GentCountTurn() {
+        return countTurns;
+    }
+
     // Get current player object
     public Player getCurrentPlayer() {
         return turn == 0 ? player1 : player2;
@@ -49,7 +53,7 @@ public class GameManager {
     }
 
     /**
-     * Show turn information at the start of each turn.
+     * Show turn information at the turn
      */
     public void showTurnInfo() {
         Player current = getCurrentPlayer();
@@ -127,4 +131,6 @@ public class GameManager {
         System.out.println("are wildcards.");
         System.out.println("Entering \",\" passes the turn.");
     }
+
+
 }

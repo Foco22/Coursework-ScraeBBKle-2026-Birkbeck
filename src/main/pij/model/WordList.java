@@ -7,7 +7,7 @@ public class WordList {
     private static final String DEFAULT_WORDLIST = "resources/wordlist.txt";
     private static Set<String> words;
 
-    // Static method to load words (for test compatibility)
+    // Static method to load words.
     public static void loadWords() {
         loadWords(DEFAULT_WORDLIST);
     }

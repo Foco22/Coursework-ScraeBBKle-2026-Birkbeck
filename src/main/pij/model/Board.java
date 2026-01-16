@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,7 +55,7 @@ public class Board {
 
 
     /**
-     * Load board configuration from file.
+     * Load board configuration from file storage.
      */
     public void loadFromFile(String filename) throws IOException {
         List<String> lines = new ArrayList<>();
@@ -66,7 +67,7 @@ public class Board {
             }
         }
 
-        // Line 0: columns, Line 1: rows, Line 2: start position (e.g., d7), make the transformation to cell coordinates
+        // provide the information to stat the board.
         if (lines.size() >= 3) {
             this.columns = Integer.parseInt(lines.get(0).trim());
             this.rows = Integer.parseInt(lines.get(1).trim());
@@ -108,7 +109,6 @@ public class Board {
 
     /**
      * Obtain the information for the given board.
-     * Format: [N] = word multiplier, <N> = letter multiplier, . = empty
      */
     private void parseRow(String line, int rowIndex) {
         int col = 0;
@@ -202,7 +202,7 @@ public class Board {
     */
     public void showBoard() {
 
-        // First : Print column headers (a, b, c, ...) 
+        // First : Print column headers
         System.out.print("   ");
         for (int col = 0; col < columns; col++) {
             System.out.printf("%4c", (char)('a' + col));
@@ -235,8 +235,7 @@ public class Board {
                 if (letter != '.') {
                     currentWord += letter;
                 } else {
-                    if (currentWord.length() >= 2) {
-                        // if the word is more than >2 length, it is a word, and add it to the Map Diccionary.                        
+                    if (currentWord.length()  >= 2) {
                         words.put(currentWord, words.getOrDefault(currentWord, 0) + 1);
                     }
                     currentWord = "";
@@ -259,7 +258,6 @@ public class Board {
                     currentWord += letter;
                 } else {
                     if (currentWord.length() >= 2) {
-                        // if the word is more than >2 length, it is a word, and add it to the Map Diccionary.                        
                         words.put(currentWord, words.getOrDefault(currentWord, 0) + 1);
                     }
                     currentWord = "";
@@ -277,10 +275,14 @@ public class Board {
     /**
      * Place a word on the board.
      */
-    public boolean placeWord(String word, String position) {
+    public boolean placeWord(String word, String position, 
+        int[] StartPosition, 
+        Integer countTurns
+
+    ) {
         // Parse position and direction
-        // "d7" = column d, row 7, direction DOWN (letter first)
-        // "7d" = row 7, column d, direction RIGHT (number first)
+        // "d7" = column d, row 7, direction down (letter first)
+        // "7d" = row 7, column d, direction right (number first)
 
         int row, col;
         boolean isHorizontal;
@@ -308,6 +310,9 @@ public class Board {
         // Place each letter - skip cells that already have letters
         int wordIndex = 0;    // Index in the input word
         int boardOffset = 0;  // Offset on the board from starting position
+        boolean wordInStartPosition = false;
+        int StartPositionRow = startPosition[0];
+        int StartPositioncol = startPosition[1];
 
         while (wordIndex < word.length()) {
             int currentRow = isHorizontal ? row : row + boardOffset;
@@ -325,13 +330,19 @@ public class Board {
                 continue;
             }
 
+            if (currentRow == StartPositionRow && currentCol == StartPositioncol) {
+                wordInStartPosition = true;
+            }
+
             // Cell is empty - place the letter in the board.
             char letter = Character.toUpperCase(word.charAt(wordIndex));
             board[currentRow][currentCol].setLetter(letter);
             wordIndex++;
             boardOffset++;
         }
-
+        if (countTurns == 0 && !wordInStartPosition) {
+            return false;
+        }
         return true;
     }
 
@@ -342,7 +353,7 @@ public class Board {
         int row, col;
         boolean isHorizontal;
 
-        // Parse position (same logic as placeWord)
+        // Parse position (same logic as placeWord). It is a easier way to parse de position and check if a horizontal or vertical.
         if (Character.isLetter(position.charAt(0))) {
             char colChar = Character.toLowerCase(position.charAt(0));
             col = colChar - 'a';
@@ -415,7 +426,7 @@ public class Board {
         return false;
     }
 
-    // Onlu a new words can exists or must be a increment of 1 for a exits word. (one occurrence)
+    // Onlu a new words can exists or must be a increment of 1 for a exist word. (one occurrence)
     return (newWords == 1 && increasedWords == 0)
         || (newWords == 0 && increasedWords == 1);
 }

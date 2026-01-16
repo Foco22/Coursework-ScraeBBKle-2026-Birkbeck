@@ -6,6 +6,7 @@ import main.pij.model.Player;
 import main.pij.service.GameManager;
 import main.pij.model.WordList;
 
+import java.util.Arrays;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -132,15 +133,22 @@ public class Main {
                 continue;
             }
 
-            // 3 Step 3: Put the word in the board
+            // 3 Step 3: Put the word in the board and get if the word is in the start position for the turn 0
+            int countTurns = game.GentCountTurn();
+            int[] StartPosition = board.getStartPosition();
+
             String word = input[0];
             String position = input[1];
-            board.placeWord(word, position);
-            
+            boolean CheckPlaceWord = board.placeWord(word, position, StartPosition, countTurns);
+            if (!CheckPlaceWord) {
+                // Invalid words - keep same player's turn
+                game.showInvalidMoveMessage(input[0], input[1]);
+                continue;
+            }
             // 4 Step 4: Get the word generate in the board.
             String WordPlayer = board.getWordAt(position);
             System.out.println("Word Player" + WordPlayer);
-            
+        
             // 5 Step 5: Check if the word generate is validate in the WordList.
             boolean CheckWordPlayer = WordList.isValidWord(WordPlayer);
             System.out.println(CheckWordPlayer);
@@ -160,7 +168,6 @@ public class Main {
             if (!ValidatedMovement) {
                 // First - Restorate the movement 
                 
-
                 // Second - Show the information 
                 game.showInvalidMoveMessage(input[0], input[1]);
                 continue;
