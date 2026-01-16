@@ -199,11 +199,7 @@ public class Main {
             System.out.println(ScorePlayerTurn);
             System.out.println(ScorePlayerTurn);
             System.out.println(ScorePlayerTurn);
-
-            // Show the board
-            board.showBoard();
-        
-            
+            currentPlayer.addScore(ScorePlayerTurn);
 
 
             // Valid move - continue to next turn
