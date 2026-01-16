@@ -201,25 +201,35 @@ public class Board {
     /**
      * Show the board in the console.
     */
-    public void showBoard() {
-
-        // First : Print column headers
+    public void showBoard(Bag bag) {
         System.out.print("   ");
         for (int col = 0; col < columns; col++) {
             System.out.printf("%4c", (char)('a' + col));
         }
         System.out.println();
-
-        // Second : Print each row with row number
+    
         for (int row = 0; row < rows; row++) {
             System.out.printf("%2d ", row + 1);
             for (int col = 0; col < columns; col++) {
-                System.out.printf("%4s", board[row][col].toString());
+    
+                Cell cell = board[row][col];
+    
+                if (cell.getLetter() != '.') {
+                    char ch = cell.getLetter();
+                    int val = bag.letterValue(ch);
+                    System.out.printf("%4s", "" + ch + val);
+                } else if (cell.getWordMult() != 0) {
+                    System.out.printf("%4s", cell.getWordMult() + "!");
+                } else if (cell.getLetterMult() != 0) {
+                    System.out.printf("%4s", cell.getLetterMult() + ".");
+                } else {
+                    System.out.printf("%4s", ".");
+                }
             }
             System.out.println();
         }
     }
-
+    
     /**
      * Get all words on the board (horizontal and vertical).
      */

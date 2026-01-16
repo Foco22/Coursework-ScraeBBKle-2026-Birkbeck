@@ -112,7 +112,6 @@ public class ScrabbleTest {
             System.out.println(board);
             Cell [][] cells_board = board.getBoard();
             int[] startPos = board.getStartPosition();
-            board.showBoard();
             System.out.println("Start position: (" + startPos[0] + ", " + startPos[1] + ")");
         } catch (Exception e) {
             fail("Exception error: " + e.getMessage());

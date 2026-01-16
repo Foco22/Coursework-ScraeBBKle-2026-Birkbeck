@@ -101,7 +101,7 @@ public class Main {
         GameManager game = new GameManager(board, player1, player2, bag, gameType);
 
         // Show the board
-        board.showBoard();
+        board.showBoard(bag);
         
         // Show the start position
         System.out.println("Start position: " + board.getStartPositionAsString());
@@ -121,7 +121,7 @@ public class Main {
             Player otherPlayer = (currentPlayerNum == 1) ? player2 : player1;
 
             if (countTurns != 0){
-                board.showBoard();
+                board.showBoard(bag);
             }
 
             game.showTurnInfo();
