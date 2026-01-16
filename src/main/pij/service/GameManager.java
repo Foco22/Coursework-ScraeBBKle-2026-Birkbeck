@@ -184,5 +184,27 @@ public class GameManager {
         System.out.println("Player 2 score: " + player2.getScore());
         System.out.println();
     }
+
+    // Get the values of the total unplayed title values.
+    public int unplayedTilesValue(Player player) {
+        int sum = 0;
+        for (var tile : player.getRack()) {
+            sum += tile.getValue();
+        }
+        return sum;
+    }
     
+    public void applyEndGamePenalty() {
+        int p1Penalty = unplayedTilesValue(player1);
+        int p2Penalty = unplayedTilesValue(player2);
+    
+        player1.addScore(-p1Penalty);
+        player2.addScore(-p2Penalty);
+    
+        System.out.println();
+        System.out.println("End of game: unplayed tiles penalty applied.");
+        System.out.println("Player 1 penalty: -" + p1Penalty + " -> score: " + player1.getScore());
+        System.out.println("Player 2 penalty: -" + p2Penalty + " -> score: " + player2.getScore());
+        System.out.println();
+    }
 }

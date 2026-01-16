@@ -201,11 +201,23 @@ public class Main {
             }
             
             // Valid move - continue to next turn
-            game.nextTurn();
-            
-            // gameRunning = false;
-            
+            game.nextTurn();            
+            gameRunning =false;
         }
+
+        // 10 Step 10: Game Over.
+        Integer UnPlayedTitlePlayer1 = game.unplayedTilesValue(player1);
+        Integer UnPlayedTitlePlayer2 = game.unplayedTilesValue(player2);
+        player1.addScore(-UnPlayedTitlePlayer1);
+        player2.addScore(-UnPlayedTitlePlayer2);
+    
+
+        System.out.println(UnPlayedTitlePlayer1);
+        System.out.println(UnPlayedTitlePlayer2);
+        
+
+
+
     }
 
     public static void main(String[] args) {
