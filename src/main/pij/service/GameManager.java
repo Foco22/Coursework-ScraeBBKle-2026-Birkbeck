@@ -174,10 +174,12 @@ public class GameManager {
 
             letterFactor = (lm == 0 ? 1 : lm);
             cellWordFactor = (wm == 0 ? 1 : wm);
+
+            sum += base * letterFactor;
+            wordFactor *= cellWordFactor;
         }
 
-        sum += base * letterFactor;
-        wordFactor *= cellWordFactor;
+
     }
 
     return sum * wordFactor;
