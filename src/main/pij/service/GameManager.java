@@ -4,11 +4,15 @@ import main.pij.model.Board;
 import main.pij.model.Bag;
 import main.pij.model.Player;
 import main.pij.model.WordList;
+import main.pij.model.WordCells;
+import main.pij.model.Cell;
+
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
 /**
  * Manages the Scrabble game flow.
@@ -133,4 +137,37 @@ public class GameManager {
     }
 
 
+    public int scoreWord(Board board, WordCells wc, Set<String> newlyPlacedCells) {
+    int sum = 0;
+    int wordFactor = 1;
+    Cell[][] boardGame = board.getBoard();           // your Cell
+
+    for (int[] pos : wc.cells) {
+        int r = pos[0];
+        int c = pos[1];
+
+        Cell cell = boardGame[r][c];
+        char ch = cell.getLetter();        // A-Z
+        int base = letterValue(ch);        // implement this
+
+        boolean isNew = newlyPlacedCells.contains(r + "," + c);
+
+        int letterFactor = 1;
+        int cellWordFactor = 1;
+
+        if (isNew) {
+            int lm = cell.getLetterMult();
+            int wm = cell.getWordMult();
+
+            letterFactor = (lm == 0 ? 1 : lm);
+            cellWordFactor = (wm == 0 ? 1 : wm);
+        }
+
+        sum += base * letterFactor;
+        wordFactor *= cellWordFactor;
+    }
+
+    return sum * wordFactor;
+
+    }
 }

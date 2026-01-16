@@ -5,10 +5,14 @@ import main.pij.model.Bag;
 import main.pij.model.Player;
 import main.pij.service.GameManager;
 import main.pij.model.WordList;
+import main.pij.model.WordCells;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
 /**
  * Main class to start the Scrabble game.
@@ -139,16 +143,32 @@ public class Main {
 
             String word = input[0];
             String position = input[1];
-            boolean CheckPlaceWord = board.placeWord(word, position, StartPosition, countTurns);
+
+            // It was created this method to copy the information of the cell that really were changed in this movement, as example: 
+            // IF the movement was SNOWS, but the WORD SNOW was before, i need to get only the S.
+            Set<String> newlyPlacedCells = new HashSet<>();
+            System.out.println(newlyPlacedCells);
+            boolean CheckPlaceWord = board.placeWord(word, position, StartPosition, countTurns,newlyPlacedCells);
+            System.out.println(newlyPlacedCells);
+            System.out.println("------------------------------------------------------------");
+            System.out.println("------------------------------------------------------------");
+
             if (!CheckPlaceWord) {
                 // Invalid words - keep same player's turn
                 game.showInvalidMoveMessage(input[0], input[1]);
                 continue;
             }
             // 4 Step 4: Get the word generate in the board.
-            String WordPlayer = board.getWordAt(position);
+            WordCells WordCellsPlayer = board.getWordAt(position);
+            String WordPlayer = WordCellsPlayer.word;
+            List<int[]> WordPlayerCells = WordCellsPlayer.cells;
             System.out.println("Word Player" + WordPlayer);
+            System.out.println("WordPlayerCells" + WordPlayerCells);
         
+            for (int[] cell : WordPlayerCells) {
+                System.out.println("(" + cell[0] + ", " + cell[1] + ")");
+            }
+
             // 5 Step 5: Check if the word generate is validate in the WordList.
             boolean CheckWordPlayer = WordList.isValidWord(WordPlayer);
             System.out.println(CheckWordPlayer);
@@ -167,11 +187,16 @@ public class Main {
             boolean ValidatedMovement = board.isValidMove(MapWordBefore, MapWordAfter);
             if (!ValidatedMovement) {
                 // First - Restorate the movement 
+                // this must be done, it is still in process. 
                 
                 // Second - Show the information 
                 game.showInvalidMoveMessage(input[0], input[1]);
                 continue;
             }
+
+            // 7 Step 7: Count the point if the movement was sucesseed.
+
+
 
 
             // Valid move - continue to next turn

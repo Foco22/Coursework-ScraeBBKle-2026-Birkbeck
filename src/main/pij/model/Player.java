@@ -2,6 +2,8 @@ package main.pij.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+ 
 
 /**
  * Represents a player in the Scrabble game.It can be Human or Computer
@@ -107,4 +109,6 @@ public class Player {
         String typeStr = (type == 'h') ? "Human" : "Computer";
         return "Player " + playerNumber + " (" + typeStr + ")";
     }
+
 }
+

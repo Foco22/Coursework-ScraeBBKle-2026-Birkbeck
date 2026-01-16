@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Represents the Scrabble game board.
@@ -277,7 +278,8 @@ public class Board {
      */
     public boolean placeWord(String word, String position, 
         int[] StartPosition, 
-        Integer countTurns
+        Integer countTurns,
+        Set<String> newlyPlacedCells
 
     ) {
         // Parse position and direction
@@ -337,6 +339,7 @@ public class Board {
             // Cell is empty - place the letter in the board.
             char letter = Character.toUpperCase(word.charAt(wordIndex));
             board[currentRow][currentCol].setLetter(letter);
+            newlyPlacedCells.add(currentRow + "," + currentCol);
             wordIndex++;
             boardOffset++;
         }
@@ -349,7 +352,7 @@ public class Board {
     /**
      * Get the complete word formed at a position in a direction.
      */
-    public String getWordAt(String position) {
+    public WordCells getWordAt(String position) {
         int row, col;
         boolean isHorizontal;
 
@@ -373,13 +376,16 @@ public class Board {
         String word = "";
         int currentRow = row;
         int currentCol = col;
+        List<int[]> cells = new ArrayList<>();
 
         while (currentRow >= 0 && currentRow < rows && currentCol >= 0 && currentCol < columns) {
             char letter = board[currentRow][currentCol].getLetter();
             if (letter == '.') {
                 break;  // not count more the word.
             }
+            
             word += letter;
+            cells.add(new int[]{currentRow, currentCol});
 
             // Next move to the board, if it is horizontal or vertical
             if (isHorizontal) {
@@ -388,7 +394,7 @@ public class Board {
                 currentRow++;
             }
         }
-        return word;
+        return new WordCells(word, cells);
     }
 
     /**
