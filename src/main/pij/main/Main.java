@@ -7,6 +7,7 @@ import main.pij.service.GameManager;
 import main.pij.model.WordList;
 import main.pij.model.WordCells;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -128,9 +129,9 @@ public class Main {
                 }
                 game.showTurnInfo();
     
-                String[] PlayerInput = game.getPlayerInput(scanner);
 
-                // 0 Step 0: Validate the input of the user.
+                // 0 Step 0: Get and Validate the input of the user.                
+                String[] PlayerInput = game.getPlayerInput(scanner);
                 if (PlayerInput[0] == null && PlayerInput[1] == null) {
                     // Pass turn
                     if (currentPlayerNum == 1) {
@@ -170,7 +171,8 @@ public class Main {
                 // It was created this method to copy the information of the cell that really were changed in this movement, as example: 
                 // IF the movement was SNOWS, but the WORD SNOW was before, i need to get only the S.
                 Set<String> newlyPlacedCells = new HashSet<>();
-                boolean CheckPlaceWord = board.placeWord(word, position, StartPosition, countTurns,newlyPlacedCells);
+                char[][] boardBefore = board.snapshotLetters();
+                boolean CheckPlaceWord = board.placeWord(word, position, StartPosition, countTurns, newlyPlacedCells);
     
                 if (!CheckPlaceWord) {
                     // Invalid words - keep same player's turn
@@ -190,14 +192,14 @@ public class Main {
                     continue;
                 }
     
-                // 6 Step 6: Getting the new with the movement of the player.
+                // 6 Step 6: Getting the new word with the movement of the player.
                 Map<String, Integer> MapWordAfter = board.getAllWordsOnBoard();
+                // If it was generated more than 1 word based on the new word, i need to cancel the movement and going back to the previous board.
                 boolean ValidatedMovement = board.isValidMove(MapWordBefore, MapWordAfter);
                 if (!ValidatedMovement) {
                     // First - Restorate the movement 
-                    // this must be done, it is still in process. 
-                    
-                    // Second - Show the information 
+                    // Solve - It provide a restore the board when the movement is not 100%, as create more currence than it is allowed. 
+                    board.restoreLetters(boardBefore);
                     game.showInvalidMoveMessage(PlayerInput[0], PlayerInput[1]);
                     continue;
                 }

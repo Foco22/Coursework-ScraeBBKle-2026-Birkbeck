@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import main.pij.main.Main;
+
 /**
  * Represents the Scrabble game board.
  */
@@ -447,6 +449,30 @@ public class Board {
         || (newWords == 0 && increasedWords == 1);
 }
 
+
+    /**
+     * Get Picture of the inicital stage of the board
+     */
+    public char[][] snapshotLetters() {
+        char[][] snap = new char[rows][columns];
+        for (int r = 0; r < rows; r++) {
+            for (int c = 0; c < columns; c++) {
+                snap[r][c] = board[r][c].getLetter();
+            }
+        }
+        return snap;
+    }
+
+    /**
+     * ReStore de inicital stage.
+     */
+    public void restoreLetters(char[][] snap) {
+        for (int r = 0; r < rows; r++) {
+            for (int c = 0; c < columns; c++) {
+                board[r][c].setLetter(snap[r][c]);
+            }
+        }
+    }
 
 
 }
