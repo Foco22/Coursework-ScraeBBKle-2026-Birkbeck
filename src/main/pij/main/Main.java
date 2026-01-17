@@ -135,10 +135,16 @@ public class Main {
                 if (PlayerInput[0] == null && PlayerInput[1] == null) {
                     // Pass turn
                     if (currentPlayerNum == 1) {
-                        skipTurnPlayer1++;
+                        skipTurnPlayer1++;                        
                     } else {
                         skipTurnPlayer2++;
                     }
+                    if (skipTurnPlayer1 >= 2 && skipTurnPlayer2 >= 2) {
+                        System.out.println("Game over: both players passed twice.");
+                        break;
+                    }
+                    game.nextTurn();
+                    continue;
 
                 } else if (PlayerInput[0].isEmpty() || PlayerInput[1].isEmpty()) {
                     // Invalid input
