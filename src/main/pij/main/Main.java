@@ -128,8 +128,30 @@ public class Main {
                 }
                 game.showTurnInfo();
     
-                String[] input = game.getPlayerInput(scanner);
-    
+                String[] PlayerInput = game.getPlayerInput(scanner);
+                System.out.println(PlayerInput);
+                System.out.println("----------------------------");
+                System.err.println(currentPlayerNum);
+
+                // 0 Step 0: Validate the input of the user.
+                if (PlayerInput[0] == null && PlayerInput[1] == null) {
+                    // Pass turn
+                    if (currentPlayerNum == 1) {
+                        skipTurnPlayer1++;
+                    } else {
+                        skipTurnPlayer2++;
+                    }
+
+                } else if (PlayerInput[0].isEmpty() || PlayerInput[1].isEmpty()) {
+                    // Invalid input
+                    game.showInvalidMoveMessage(PlayerInput[0], PlayerInput[1]);
+                    continue;
+                } else {
+                    // Valid input ✅
+                    String word = PlayerInput[0];
+                    String position = PlayerInput[1];
+                }
+                
                 // 1- Step 1: Check the words in the board before the movement of the player. 
                 // I need to compare the begining state of tha board with the last state.
                 Map<String, Integer> MapWordBefore = board.getAllWordsOnBoard();
@@ -139,15 +161,14 @@ public class Main {
     
                 if (!CheckWords) {
                     // Invalid words - keep same player's turn
-                    game.showInvalidMoveMessage(input[0], input[1]);
+                    game.showInvalidMoveMessage(PlayerInput[0], PlayerInput[1]);
                     continue;
                 }
     
                 // 3 Step 3: Put the word in the board and get if the word is in the start position for the turn 0
                 int[] StartPosition = board.getStartPosition();
-    
-                String word = input[0];
-                String position = input[1];
+                String word = PlayerInput[0];
+                String position = PlayerInput[1];
     
                 // It was created this method to copy the information of the cell that really were changed in this movement, as example: 
                 // IF the movement was SNOWS, but the WORD SNOW was before, i need to get only the S.
@@ -156,7 +177,7 @@ public class Main {
     
                 if (!CheckPlaceWord) {
                     // Invalid words - keep same player's turn
-                    game.showInvalidMoveMessage(input[0], input[1]);
+                    game.showInvalidMoveMessage(PlayerInput[0], PlayerInput[1]);
                     continue;
                 }
                 // 4 Step 4: Get the word generate in the board.
@@ -168,7 +189,7 @@ public class Main {
                 boolean CheckWordPlayer = WordList.isValidWord(WordPlayer);
                 if (!CheckWordPlayer) {
                     // Invalid words - keep same player's turn
-                    game.showInvalidMoveMessage(input[0], input[1]);
+                    game.showInvalidMoveMessage(PlayerInput[0], PlayerInput[1]);
                     continue;
                 }
     
@@ -180,7 +201,7 @@ public class Main {
                     // this must be done, it is still in process. 
                     
                     // Second - Show the information 
-                    game.showInvalidMoveMessage(input[0], input[1]);
+                    game.showInvalidMoveMessage(PlayerInput[0], PlayerInput[1]);
                     continue;
                 }
     
