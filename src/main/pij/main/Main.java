@@ -145,7 +145,7 @@ public class Main {
                     continue;
                 } else {
                     // Valid input ✅
-                    String word = PlayerInput[0];
+                    String RowInputPlayerWord = PlayerInput[0];
                     String position = PlayerInput[1];
                 }
                 
@@ -203,7 +203,8 @@ public class Main {
                 }
     
                 // 7 Step 7: Count the point if the movement was sucesseed.
-                Integer ScorePlayerTurn = game.scoreWord(board, WordCellsPlayer, newlyPlacedCells);
+                String RowInputPlayerWord = PlayerInput[0];
+                Integer ScorePlayerTurn = game.scoreWord(board, WordCellsPlayer, newlyPlacedCells, RowInputPlayerWord);
                 currentPlayer.addScore(ScorePlayerTurn);
                 currentPlayer.refillRack(bag);      
                 
@@ -223,7 +224,6 @@ public class Main {
 
                 // Valid move - continue to next turn
                 game.nextTurn();            
-                gameRunning =false;
             }   
 
             // Logic to a COMPUTER player - 

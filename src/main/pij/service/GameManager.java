@@ -102,11 +102,11 @@ public class GameManager {
             return new String[]{"", ""};
         }
     
-        String word = parts[0].trim().toUpperCase();
+        String word = parts[0].trim();
         String position = parts[1].trim().toLowerCase();
     
         // Validate WORD (letters only)
-        if (!word.matches("[A-Z]+")) {
+        if (!word.matches("[A-Za-z]+")) {
             System.out.println("Invalid word. Only letters are allowed.");
             return new String[]{"", ""};
         }
@@ -147,41 +147,50 @@ public class GameManager {
     }
 
 
-    public int scoreWord(Board board, WordCells WordCellsPlayer, Set<String> newlyPlacedCells) {
-    int sum = 0;
-    int wordFactor = 1;
-    Cell[][] boardGame = board.getBoard();           // your Cell
-
-    for (int[] pos : WordCellsPlayer.cells) {
-        int r = pos[0];
-        int c = pos[1];
-
-        Cell cell = boardGame[r][c];
-        char ch = cell.getLetter();        // A-Z
-        int base = bag.letterValue(ch);        // implement this
-
-        boolean isNew = newlyPlacedCells.contains(r + "," + c);
-
-        int letterFactor = 1;
-        int cellWordFactor = 1;
-
-        if (isNew) {
-            int lm = cell.getLetterMult();
-            int wm = cell.getWordMult();
-
-            letterFactor = (lm == 0 ? 1 : lm);
-            cellWordFactor = (wm == 0 ? 1 : wm);
-
-            sum += base * letterFactor;
-            wordFactor *= cellWordFactor;
+    public int scoreWord(Board board, WordCells wordCellsPlayer, Set<String> newlyPlacedCells, String rawInputWord) {
+        int sum = 0;
+        int wordFactor = 1;
+    
+        Cell[][] boardGame = board.getBoard();
+    
+        // Safety: if mismatch, avoid crash
+        int n = Math.min(wordCellsPlayer.cells.size(), rawInputWord.length());
+    
+        for (int i = 0; i < n; i++) {
+            int[] pos = wordCellsPlayer.cells.get(i);
+            int r = pos[0];
+            int c = pos[1];
+    
+            Cell cell = boardGame[r][c];
+    
+            boolean isNew = newlyPlacedCells.contains(r + "," + c);
+    
+            // Use RAW input to detect a wildcard
+            char rawCh = rawInputWord.charAt(i);
+            boolean isWildcard = Character.isLowerCase(rawCh);
+    
+            // Use board letter (uppercase) for normal tiles
+            char boardCh = cell.getLetter();
+            int base = isWildcard ? 8 : bag.letterValue(boardCh);
+    
+            if (isNew) {
+                int letterMult = cell.getLetterMult();
+                int wordMult = cell.getWordMult();
+    
+                int letterFactor = (letterMult == 0 ? 1 : letterMult);
+                int cellWordFactor = (wordMult == 0 ? 1 : wordMult);
+    
+                sum += base * letterFactor;
+                wordFactor *= cellWordFactor;
+            } else {
+                sum += base;
+            }
         }
-
-
+    
+        return sum * wordFactor;
     }
+    
 
-    return sum * wordFactor;
-
-    }
     public void nextTurn() {
         turn = 1 - turn;     // Change the turnn to 0 a 1
         countTurns++;        // Add Count the turn

@@ -40,7 +40,8 @@ public class Player {
         rack.clear();
         rack.add(new Tile('R', 1));
         rack.add(new Tile('U', 1));
-        rack.add(new Tile('N', 1));
+        rack.add(new Tile('_', 8));
+
     }
 
     /**
