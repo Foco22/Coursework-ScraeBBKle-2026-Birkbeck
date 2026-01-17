@@ -129,9 +129,6 @@ public class Main {
                 game.showTurnInfo();
     
                 String[] PlayerInput = game.getPlayerInput(scanner);
-                System.out.println(PlayerInput);
-                System.out.println("----------------------------");
-                System.err.println(currentPlayerNum);
 
                 // 0 Step 0: Validate the input of the user.
                 if (PlayerInput[0] == null && PlayerInput[1] == null) {

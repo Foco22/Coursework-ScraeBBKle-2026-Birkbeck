@@ -90,25 +90,35 @@ public class GameManager {
     public String[] getPlayerInput(Scanner scanner) {
         System.out.print("> ");
         String input = scanner.nextLine().trim();
-
-        // Check for pass (just comma)
+    
+        // Pass turn
         if (input.equals(",")) {
-            return new String[]{null, null};  // Pass turn
+            return new String[]{null, null};
         }
-
-        // Parse word and position
+    
         String[] parts = input.split(",");
         if (parts.length != 2) {
-            System.out.println("Invalid format. Use: word,square (e.g., RUN,d7)");
-            return new String[]{"", ""};  // Invalid input
+            System.out.println("Invalid format. Use: WORD,POSITION (e.g., RUN,d7)");
+            return new String[]{"", ""};
         }
-
-
-        String word = parts[0].trim();
-        String position = parts[1].trim();
-
+    
+        String word = parts[0].trim().toUpperCase();
+        String position = parts[1].trim().toLowerCase();
+    
+        // Validate WORD (letters only)
+        if (!word.matches("[A-Z]+")) {
+            System.out.println("Invalid word. Only letters are allowed.");
+            return new String[]{"", ""};
+        }
+    
+        // Validate POSITION (letter+number OR number+letter). It prevent mistake in the inputs.
+        if (!position.matches("([a-z][0-9]+)|([0-9]+[a-z])")) {
+            System.out.println("Invalid position. Use letter+number or number+letter (e.g., d7 or 7d).");
+            return new String[]{"", ""};
+        }
+    
         return new String[]{word, position};
-    }
+    }    
 
     /**
      * Checks if all words on the board are valid.
