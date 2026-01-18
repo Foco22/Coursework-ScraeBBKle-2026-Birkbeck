@@ -172,7 +172,7 @@ public class Main {
                     game.showInvalidMoveMessage(PlayerInput[0], PlayerInput[1]);
                     continue;
                 }
-    
+                
                 // 3 Step 3: Put the word in the board and get if the word is in the start position for the turn 0
                 int[] StartPosition = board.getStartPosition();
                 String word = PlayerInput[0];
@@ -186,9 +186,12 @@ public class Main {
     
                 if (!CheckPlaceWord) {
                     // Invalid words - keep same player's turn
+                    // Need to store the board as the placeWord method is adding the word to the board
+                    board.restoreLetters(boardBefore);
                     game.showInvalidMoveMessage(PlayerInput[0], PlayerInput[1]);
                     continue;
                 }
+
                 // 4 Step 4: Get the word generate in the board.
                 WordCells WordCellsPlayer = board.getWordAt(position);
                 String WordPlayer = WordCellsPlayer.word;
@@ -204,6 +207,8 @@ public class Main {
     
                 // 6 Step 6: Getting the new word with the movement of the player.
                 Map<String, Integer> MapWordAfter = board.getAllWordsOnBoard();
+
+                System.out.println(MapWordAfter);
                 // If it was generated more than 1 word based on the new word, i need to cancel the movement and going back to the previous board.
                 boolean ValidatedMovement = board.isValidMove(MapWordBefore, MapWordAfter);
                 if (!ValidatedMovement) {
