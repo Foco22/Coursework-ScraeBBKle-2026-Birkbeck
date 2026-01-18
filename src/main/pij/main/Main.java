@@ -159,6 +159,10 @@ public class Main {
                 // 1- Step 1: Check the words in the board before the movement of the player. 
                 // I need to compare the begining state of tha board with the last state.
                 Map<String, Integer> MapWordBefore = board.getAllWordsOnBoard();
+                boolean EmptyMapWord = game.CheckEmptyMapWord(MapWordBefore);
+                System.out.println(MapWordBefore);
+                System.out.println(EmptyMapWord);
+
     
                 // 2- Step 2: Validate if the words on the board are validated.
                 boolean CheckWords = game.areAllWordsValid(MapWordBefore);
@@ -178,7 +182,7 @@ public class Main {
                 // IF the movement was SNOWS, but the WORD SNOW was before, i need to get only the S.
                 Set<String> newlyPlacedCells = new HashSet<>();
                 char[][] boardBefore = board.snapshotLetters();
-                boolean CheckPlaceWord = board.placeWord(word, position, StartPosition, countTurns, newlyPlacedCells);
+                boolean CheckPlaceWord = board.placeWord(word, position, StartPosition, countTurns, newlyPlacedCells, EmptyMapWord);
     
                 if (!CheckPlaceWord) {
                     // Invalid words - keep same player's turn

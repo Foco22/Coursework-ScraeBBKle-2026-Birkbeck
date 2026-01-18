@@ -231,7 +231,12 @@ public class GameManager {
         }
     }
 
-    
-    
-
+    // Check if the Board is empty of word
+    public boolean CheckEmptyMapWord(Map<String, Integer> MapWord) {
+        if (MapWord.isEmpty()) {
+            return true;
+        } else {
+            return false;
+        }    
+    }
 }

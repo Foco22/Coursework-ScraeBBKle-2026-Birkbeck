@@ -32,26 +32,6 @@ public class ComputerMove {
     }
     
 
-    public class Permutations {
-
-        public static void permute(String prefix, String remaining) {
-            if (prefix.length() == 3) {
-                System.out.println(prefix);
-                return;
-            }
-    
-            for (int i = 0; i < remaining.length(); i++) {
-                permute(
-                    prefix + remaining.charAt(i),
-                    remaining.substring(0, i) + remaining.substring(i + 1)
-                );
-            }
-        }
-    
-        public static void main(String[] args) {
-            permute("", "arun");
-        }
-    }
     
 
 }

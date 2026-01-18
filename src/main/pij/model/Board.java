@@ -291,7 +291,8 @@ public class Board {
     public boolean placeWord(String word, String position, 
         int[] StartPosition, 
         Integer countTurns,
-        Set<String> newlyPlacedCells
+        Set<String> newlyPlacedCells,
+        boolean EmptyMapWord
 
     ) {
         // Parse position and direction
@@ -355,7 +356,7 @@ public class Board {
             wordIndex++;
             boardOffset++;
         }
-        if (countTurns == 0 && !wordInStartPosition) {
+        if (EmptyMapWord && !wordInStartPosition) {
             return false;
         }
         return true;
