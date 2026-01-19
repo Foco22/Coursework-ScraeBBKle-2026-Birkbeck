@@ -76,7 +76,14 @@ public class ComputerMove {
         return null;  // No valid word found
     }
 
-    public void SearchMove(int currentPlayerNum, Board board, List<Tile> Tiles) {
+    public void SearchMove(int currentPlayerNum, 
+                           Board board, 
+                           List<Tile> Tiles,
+                           GameManager game,
+                           int[] StartPosition,
+                           int countTurns
+
+                           ) {
 
         Cell[][] cells = board.getBoard();    
                                                                                                                
@@ -108,7 +115,7 @@ public class ComputerMove {
                         int startCol = col;      
                         
                         // Algorthimo to iterate based on the word
-                        IterationSearch(wordBoard, row, startCol, endCol, Tiles);
+                        IterationSearch(wordBoard, row, startCol, endCol, Tiles, board, game, StartPosition, countTurns);
                     }                                                                                                                
                 }                   
             }                                                                                                                                                       
@@ -116,7 +123,16 @@ public class ComputerMove {
         }
     }
 
-    public void IterationSearch(String word, int row, int startCol, int endCol , List<Tile> Tiles) {
+    public void IterationSearch(String word, 
+                                int row, 
+                                int startCol, 
+                                int endCol , 
+                                List<Tile> Tiles,
+                                Board board,
+                                GameManager game,
+                                int[] StartPosition,
+                                int countTurns
+                                ) {
 
         // The idea os the algoritmo is that if it detect a word, so it is moving like this:
         // R
@@ -141,17 +157,39 @@ public class ComputerMove {
         for (int tilesBefore = 0; tilesBefore <= MaxTiles; tilesBefore++) {                                                                                   
             for (int tilesAfter = 0; tilesAfter <= MaxTiles - tilesBefore; tilesAfter++) {              
 
+              // Calcular nueva posición                                                                                                                    
+              int newStartCol = startCol - tilesBefore;                                                                                                     
+              int newEndCol = endCol + tilesAfter;    
+
+              if (newStartCol < 0 || newEndCol >= board.getBoard()[0].length) {                                                                                 
+                continue;  // Se sale del tablero, saltar                                                                                                     
+               }                                                                                                                                                 
+               
               // Build pattern: "___" + word + "__"                                                                                                         
               String pattern = "_".repeat(tilesBefore) + word + "_".repeat(tilesAfter);                                                                     
               List<String> validWords = new ArrayList<>();  
               System.out.println(pattern);
 
               tryAllCombinations(pattern, myTiles, 0, "", validWords);                                                                                      
-                                                                                                                                                            
+                                                                                                                                                                          
+              // Start the validate the word. 
               for (String validWord : validWords) {                                                                                                         
-                  System.out.println("Valid word found: " + validWord);                                                                                     
-              }                                                                                                                                             
-            }                                                                                                                                       
+                // Step 0: Get the board before the move.
+                Map<String, Integer> MapWordBefore = board.getAllWordsOnBoard();
+                boolean EmptyMapWord = game.CheckEmptyMapWord(MapWordBefore);
+
+                // Define start position
+                String position = "" + (char)('a' + newStartCol) + (row + 1);  // Ejemplo: "e5"   
+
+                // Step 1: Put the word in the board.
+                Set<String> newlyPlacedCells = new HashSet<>();
+                char[][] boardBefore = board.snapshotLetters();
+                boolean CheckPlaceWord = board.placeWord(validWord, position, StartPosition, countTurns, newlyPlacedCells, EmptyMapWord);
+                                                                                                     
+              }  
+
+            }                                                           
+
         }
     }
 

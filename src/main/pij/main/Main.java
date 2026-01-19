@@ -338,7 +338,8 @@ public class Main {
                 
                 ComputerMove computerMove = new ComputerMove(player1, player2);
                 List<Tile> PlayerTiles = currentPlayer.getRack();
-                computerMove.SearchMove(currentPlayerNum, board, PlayerTiles);
+                int[] StartPosition = board.getStartPosition();
+                computerMove.SearchMove(currentPlayerNum, board, PlayerTiles, game, StartPosition, countTurns);
 
                 //gameRunning = false;
                 
