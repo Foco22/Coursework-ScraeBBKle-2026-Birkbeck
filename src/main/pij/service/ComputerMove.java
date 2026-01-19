@@ -76,10 +76,10 @@ public class ComputerMove {
         return null;  // No valid word found
     }
 
-    public void SearchMove(int currentPlayerNum, Board board) {
+    public void SearchMove(int currentPlayerNum, Board board, List<Tile> Tiles) {
 
-        Cell[][] cells = board.getBoard();                                                                                                                      
-                                                                                                                                                              
+        Cell[][] cells = board.getBoard();    
+                                                                                                               
         // First: iterate HORIZONTALLY (each row, left to right)                                                                                                
         for (int row = 0; row < cells.length; row++) {                                                                                                          
             for (int col = 0; col < cells[row].length; col++) {                                                                                                 
@@ -95,20 +95,46 @@ public class ComputerMove {
                     if (isWordStart) {                                                                                                                                 
                                                                                                                         
                         String wordBoard = "";                                                                                                      
-                        int i = col;                                                                                                                                   
-                        while (i < cells[row].length && cells[row][i].getLetter() != '.') {                                                                            
-                            wordBoard = wordBoard + cells[row][i].getLetter();                                                                                                
-                            i++;                                                                                                                                       
+                        int endCol = col;                                                                                                                                  
+                        while (endCol < cells[row].length && cells[row][endCol].getLetter() != '.') {                                                                            
+                            wordBoard = wordBoard + cells[row][endCol].getLetter();                                                                                                
+                            endCol++;                                                                                                                                       
                         };  
                         System.out.println("Word: " + wordBoard);                                                                                                  
                         System.out.println("Row: " + row + ", Start Col: " + col);                                                                                 
                                                                                                                                                                    
                         // Skip to end of word                                                                                                                     
-                        col = i - 1;                                                                                                                                                                      
+                        endCol--;   
+                        int startCol = col;      
+                        
+                        // Algorthimo to iterate based on the word
+                        IterationSearch(wordBoard, row, startCol, endCol, Tiles);
                     }                                                                                                                
                 }                   
             }                                                                                                                                                       
         
         }
+    }
+
+    public void IterationSearch(String word, int row, int startCol, int endCol , List<Tile> Tiles) {
+
+        // The idea os the algoritmo is that if it detect a word, so it is moving like this:
+        // _R
+        // _R_
+        // _ _ R _
+        // _ _ R _ _
+        // _ _ _ R _ _
+        // As it can see, it get the word from start to end, and then i got iterative for the previous empty space to create word based on my tiles
+        // it is neccesary to validate if the word create not generate a other currerente here.
+        // Convert tiles to string                                                                                                                            
+        
+        String myTiles = "";                                                                                                                                  
+        for (Tile tile : Tiles) {                                                                                                                             
+            myTiles += tile.getLetter();                                                                                                                      
+        }         
+        System.out.println(myTiles);
+
+
+
     }
 }

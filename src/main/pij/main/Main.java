@@ -3,6 +3,7 @@ package main.pij.main;
 import main.pij.model.Board;
 import main.pij.model.Bag;
 import main.pij.model.Player;
+import main.pij.model.Tile;
 import main.pij.service.ComputerMove;
 import main.pij.service.GameManager;
 import main.pij.model.WordList;
@@ -336,8 +337,9 @@ public class Main {
                 }
                 
                 ComputerMove computerMove = new ComputerMove(player1, player2);
-                computerMove.SearchMove(currentPlayerNum, board);
-                
+                List<Tile> PlayerTiles = currentPlayer.getRack();
+                computerMove.SearchMove(currentPlayerNum, board, PlayerTiles);
+
                 //gameRunning = false;
                 
                 
