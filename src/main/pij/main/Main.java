@@ -250,9 +250,6 @@ public class Main {
             }
         
         
-        
-        
-        
         }
 
         // 10 Step 10: Game Over.
