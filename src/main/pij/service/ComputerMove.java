@@ -33,36 +33,28 @@ public class ComputerMove {
 
     public void FirstMove(int currentPlayerNum) {
 
+        System.out.println("currentPlayerNum");
+        String playerWords = "";                                                                                                                              
+        List<Tile> PlayerRack;                                                                                                                                
+                                  
         if (currentPlayerNum == 1) {
-            String playerWords = "";
-            List<Tile> PlayerRack = player1.getRack();
-            System.out.println("Player rack:");
-            for (Tile tile : PlayerRack) {
-                System.out.println(tile);
-                playerWords += tile.getLetter();
-            }
-            System.out.println("------------------------------------------");
-            System.out.println(playerWords);
-            Set<String> result = new HashSet<>();                                                                                                                     
-            WordPermutations.permuteLenN(playerWords, "", result, 2); 
-            System.out.println(result);
-            
-
-        } 
-        else {
-
-            String playerWords = "";
-            List<Tile> PlayerRack = player2.getRack();
-            System.out.println("Player rack:");
-            for (Tile tile : PlayerRack) {
-                System.out.println(tile);
-                playerWords += tile.getLetter();
-            }
-            System.out.println(playerWords);
-            Set<String> result = new HashSet<>();                                                                                                                     
-            WordPermutations.permuteLenN(playerWords, "", result, 2); 
-            System.out.println(result);
+            PlayerRack = player1.getRack();
         }
+        else {
+            PlayerRack = player2.getRack();
+        }
+
+        System.out.println("Player rack:");
+        for (Tile tile : PlayerRack) {
+            System.out.println(tile);
+            playerWords += tile.getLetter();
+        }
+        System.out.println("------------------------------------------");
+        System.out.println(playerWords);
+        Set<String> result = new HashSet<>();                                                                                                                     
+        WordPermutations.permuteLenN(playerWords, "", result, 2); 
+        System.out.println(result);
+            
     }
     
 
