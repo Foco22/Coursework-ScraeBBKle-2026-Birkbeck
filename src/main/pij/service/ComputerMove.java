@@ -49,9 +49,6 @@ public class ComputerMove {
             System.out.println(tile);
             playerWords += tile.getLetter();
         }
-        System.out.println("------------------------------------------");
-        System.out.println(playerWords);
-
 
         // Max to min size of the player Rack   
         for (int i = PlayerRack.size(); i >= 0; i--) {
@@ -60,23 +57,23 @@ public class ComputerMove {
             
             // for each permutation is calculate the possible word.
             for (String word : PermutationWords) {
-                System.out.println(word);
-                System.out.println("sFOCO---------");
-                if (word.contains("_")) {                                                                                                                      
-                    for (char c = 'a'; c <= 'z'; c++) {                                                                                                               
-                        String expanded = playerWords.replace('_', c);                                                                                                
-                        boolean checkWord = WordList.isValidWord(expanded);  
+                if (word.contains("_")) {
+                    for (char c = 'a'; c <= 'z'; c++) {
+                        String expanded = word.replace('_', c);
+                        boolean checkWord = WordList.isValidWord(expanded);
                         if (checkWord) {
-                            return expanded
+                            return expanded;
                         }
-
-                    }                                                                                                                                                 
-                } else {                                                                                                                                              
-                    boolean checkWord = WordList.isValidWord(word);    
-                    break;
-                }  
-                break;
-            }   
+                    }
+                } else {
+                    boolean checkWord = WordList.isValidWord(word);
+                    if (checkWord) {
+                        return word;
+                    }
+                }
+            }
         }
+        return null;  // No valid word found
     }
+
 }

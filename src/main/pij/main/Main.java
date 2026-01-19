@@ -82,7 +82,7 @@ public class Main {
 
         System.out.print("Player 2 - Enter 'h' for human or 'c' for computer: ");
         //char player2Type = scanner.nextLine().trim().toLowerCase().charAt(0);
-        char player2Type = 'c';
+        char player2Type = 'h';
         Player player2 = new Player(2, player2Type);
 
         // 3. Game type (it is still not used the class, but we prepare the input)
@@ -161,10 +161,7 @@ public class Main {
                 // I need to compare the begining state of tha board with the last state.
                 Map<String, Integer> MapWordBefore = board.getAllWordsOnBoard();
                 boolean EmptyMapWord = game.CheckEmptyMapWord(MapWordBefore);
-                System.out.println(MapWordBefore);
-                System.out.println(EmptyMapWord);
 
-    
                 // 2- Step 2: Validate if the words on the board are validated.
                 boolean CheckWords = game.areAllWordsValid(MapWordBefore);
     
@@ -246,10 +243,53 @@ public class Main {
 
             // Logic to a COMPUTER player - 
             else {
+                
+                // Step 0: Get the first word if board is empty
+                Map<String, Integer> MapWordBefore = board.getAllWordsOnBoard();
+                boolean EmptyMapWord = game.CheckEmptyMapWord(MapWordBefore);
+                if (EmptyMapWord) {
+                    ComputerMove computerMove = new ComputerMove(player1, player2);                                                                  
+                    String PlayerWord = computerMove.FirstMoveWord(currentPlayerNum);  
+                    // if the element is null, so it pass the turn.    
+                    if (PlayerWord == null ) {
+                        // Pass the turn
+                        game.nextTurn();
+                        continue;
+                    }    
+                    else {
+                        int[] StartPosition = board.getStartPosition();
+                        String word = PlayerWord;
+                        String position = board.getStartPositionAsString();
+                        System.out.println(PlayerWord);
+                        System.out.println(position);
+
+                        // Step 1: Put the eord, using the Start postion as the position of the default
+                        Set<String> newlyPlacedCells = new HashSet<>();
+                        char[][] boardBefore = board.snapshotLetters();
+                        boolean CheckPlaceWord = board.placeWord(word, position, StartPosition, countTurns, newlyPlacedCells, EmptyMapWord);
+        
+                        if (!CheckPlaceWord) {
+                            // Invalid words - keep same player's turn
+                            // Need to store the board as the placeWord method is adding the word to the board
+                            board.restoreLetters(boardBefore);
+                            game.showInvalidMoveMessage(PlayerWord, position);
+                            continue;
+                        }
+
+                        // 4 Step 4: Get the word generate in the board.
+                        WordCells WordCellsPlayer = board.getWordAt(position);
+                        String WordPlayer = WordCellsPlayer.word;
+                        List<int[]> WordPlayerCells = WordCellsPlayer.cells;
+
+
+                    }
+                }
+
+
+
                 gameRunning = false;
-                ComputerMove computerMove = new ComputerMove(player1, player2);                                                                  
-                computerMove.FirstMove(currentPlayerNum);                                                                                                                 
-                                                           
+                
+                
             }
         
         
