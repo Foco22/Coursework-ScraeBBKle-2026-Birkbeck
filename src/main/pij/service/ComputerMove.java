@@ -119,11 +119,15 @@ public class ComputerMove {
     public void IterationSearch(String word, int row, int startCol, int endCol , List<Tile> Tiles) {
 
         // The idea os the algoritmo is that if it detect a word, so it is moving like this:
-        // _R
-        // _R_
-        // _ _ R _
-        // _ _ R _ _
-        // _ _ _ R _ _
+        // R
+        // R_
+        // R_ _
+        // R _ _ _
+        // when it is finish i go to the 
+        // _ R_
+        // _ R _ _
+        // _ R _ _ _
+        // etc
         // As it can see, it get the word from start to end, and then i got iterative for the previous empty space to create word based on my tiles
         // it is neccesary to validate if the word create not generate a other currerente here.
         // Convert tiles to string                                                                                                                            
@@ -140,6 +144,7 @@ public class ComputerMove {
               // Build pattern: "___" + word + "__"                                                                                                         
               String pattern = "_".repeat(tilesBefore) + word + "_".repeat(tilesAfter);                                                                     
               List<String> validWords = new ArrayList<>();  
+              System.out.println(pattern);
 
               tryAllCombinations(pattern, myTiles, 0, "", validWords);                                                                                      
                                                                                                                                                             
@@ -151,6 +156,27 @@ public class ComputerMove {
     }
 
     private void tryAllCombinations(String pattern, String availableTiles, int index, String current, List<String> validWords) {                               
-                                                                                                                                                              
+ 
+        if (index == pattern.length()) {                                                                                                                       
+            // Check if valid word                                                                                                                             
+            if (WordList.isValidWord(current)) {                                                                                                               
+                validWords.add(current);                                                                                                                       
+            }                                                                                                                                                  
+            return;                                                                                                                                            
+        }                                                                                                                                                      
+                                                                                                                                                               
+        char c = pattern.charAt(index);                                                                                                                        
+        if (c == '_') {                                                                                                                                        
+            // Try each letter                                                                                                                
+            for (int i = 0; i < availableTiles.length(); i++) {                                                                                                
+                char tile = availableTiles.charAt(i);                                                                                                          
+                // Must remove a element of the tile, so it can not count it again.                                                                                                          
+                String remaining = availableTiles.substring(0, i) + availableTiles.substring(i + 1);                                                           
+                tryAllCombinations(pattern, remaining, index + 1, current + tile, validWords);                                                                 
+            }                                                                                                                                                  
+        } else {                                                                                                                                               
+            // If the letter is from board, i move on it.                                                                                                       
+            tryAllCombinations(pattern, availableTiles, index + 1, current + c, validWords);                                                                   
+        } 
     }   
 }
