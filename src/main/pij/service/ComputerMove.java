@@ -133,8 +133,24 @@ public class ComputerMove {
             myTiles += tile.getLetter();                                                                                                                      
         }         
         System.out.println(myTiles);
+        int MaxTiles = Tiles.size();
+        for (int tilesBefore = 0; tilesBefore <= MaxTiles; tilesBefore++) {                                                                                   
+            for (int tilesAfter = 0; tilesAfter <= MaxTiles - tilesBefore; tilesAfter++) {              
 
+              // Build pattern: "___" + word + "__"                                                                                                         
+              String pattern = "_".repeat(tilesBefore) + word + "_".repeat(tilesAfter);                                                                     
+              List<String> validWords = new ArrayList<>();  
 
-
+              tryAllCombinations(pattern, myTiles, 0, "", validWords);                                                                                      
+                                                                                                                                                            
+              for (String validWord : validWords) {                                                                                                         
+                  System.out.println("Valid word found: " + validWord);                                                                                     
+              }                                                                                                                                             
+            }                                                                                                                                       
+        }
     }
+
+    private void tryAllCombinations(String pattern, String availableTiles, int index, String current, List<String> validWords) {                               
+                                                                                                                                                              
+    }   
 }
