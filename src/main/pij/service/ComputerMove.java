@@ -76,4 +76,19 @@ public class ComputerMove {
         return null;  // No valid word found
     }
 
+    public void SearchMove(int currentPlayerNum, Board board) {
+
+        Cell[][] cells = board.getBoard();                                                                                                                      
+                                                                                                                                                              
+        // First: iterate HORIZONTALLY (each row, left to right)                                                                                                
+        for (int row = 0; row < cells.length; row++) {                                                                                                          
+            for (int col = 0; col < cells[row].length; col++) {                                                                                                 
+                Cell cell = cells[row][col];  
+                System.err.println(cell);                                                                                                                  
+                // Check horizontal placements                                                                                                                  
+            }                                                                                                                                                   
+        }                                                                                                                                                       
+          
+
+    }
 }

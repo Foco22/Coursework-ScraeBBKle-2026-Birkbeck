@@ -77,7 +77,7 @@ public class Main {
         //  Players
         System.out.print("Player 1 - Enter 'h' for human or 'c' for computer: ");
         // char player1Type = scanner.nextLine().trim().toLowerCase().charAt(0);
-        char player1Type = 'h';
+        char player1Type = 'c';
         Player player1 = new Player(1, player1Type);
 
         System.out.print("Player 2 - Enter 'h' for human or 'c' for computer: ");
@@ -243,9 +243,16 @@ public class Main {
             // Logic to a COMPUTER player - 
             else {
                 
+                if (countTurns != 0){
+                    board.showBoard(bag);
+                }
+                game.showTurnInfo();
+
                 // Step 0: Get the first word if board is empty
                 Map<String, Integer> MapWordBefore = board.getAllWordsOnBoard();
                 boolean EmptyMapWord = game.CheckEmptyMapWord(MapWordBefore);
+
+                
                 if (EmptyMapWord) {
                     ComputerMove computerMove = new ComputerMove(player1, player2);                                                                  
                     String PlayerWord = computerMove.FirstMoveWord(currentPlayerNum);  
@@ -319,11 +326,18 @@ public class Main {
                         // Valid move - continue to next turn
                         game.nextTurn();    
 
-                    }
+                    } 
+                
                 }
 
-
-
+                // Stop the game for testing
+                if (countTurns >= 1 ){
+                    gameRunning = false;
+                }
+                
+                ComputerMove computerMove = new ComputerMove(player1, player2);
+                computerMove.SearchMove(currentPlayerNum, board);
+                
                 //gameRunning = false;
                 
                 
