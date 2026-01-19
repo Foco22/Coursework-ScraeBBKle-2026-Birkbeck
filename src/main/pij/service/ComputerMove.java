@@ -31,7 +31,7 @@ public class ComputerMove {
         this.player2 = player2;
     }
 
-    public void FirstMove(int currentPlayerNum) {
+    public String FirstMoveWord(int currentPlayerNum) {
 
         System.out.println("currentPlayerNum");
         String playerWords = "";                                                                                                                              
@@ -51,11 +51,32 @@ public class ComputerMove {
         }
         System.out.println("------------------------------------------");
         System.out.println(playerWords);
-        Set<String> result = new HashSet<>();                                                                                                                     
-        WordPermutations.permuteLenN(playerWords, "", result, 2); 
-        System.out.println(result);
-            
-    }
-    
 
+
+        // Max to min size of the player Rack   
+        for (int i = PlayerRack.size(); i >= 0; i--) {
+            Set<String> PermutationWords = new HashSet<>();                                                                                                                     
+            WordPermutations.permuteLenN(playerWords, "", PermutationWords, i);
+            
+            // for each permutation is calculate the possible word.
+            for (String word : PermutationWords) {
+                System.out.println(word);
+                System.out.println("sFOCO---------");
+                if (word.contains("_")) {                                                                                                                      
+                    for (char c = 'a'; c <= 'z'; c++) {                                                                                                               
+                        String expanded = playerWords.replace('_', c);                                                                                                
+                        boolean checkWord = WordList.isValidWord(expanded);  
+                        if (checkWord) {
+                            return expanded
+                        }
+
+                    }                                                                                                                                                 
+                } else {                                                                                                                                              
+                    boolean checkWord = WordList.isValidWord(word);    
+                    break;
+                }  
+                break;
+            }   
+        }
+    }
 }
