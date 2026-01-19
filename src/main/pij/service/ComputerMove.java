@@ -81,8 +81,9 @@ public class ComputerMove {
                            List<Tile> Tiles,
                            GameManager game,
                            int[] StartPosition,
-                           int countTurns
-
+                           int countTurns,
+                           Player currentPlayer,
+                           Bag bag
                            ) {
 
         Cell[][] cells = board.getBoard();    
@@ -115,7 +116,7 @@ public class ComputerMove {
                         int startCol = col;      
                         
                         // Algorthimo to iterate based on the word
-                        IterationSearch(wordBoard, row, startCol, endCol, Tiles, board, game, StartPosition, countTurns);
+                        IterationSearch(wordBoard, row, startCol, endCol, Tiles, board, game, StartPosition, countTurns, currentPlayer, bag);
                     }                                                                                                                
                 }                   
             }                                                                                                                                                       
@@ -131,7 +132,9 @@ public class ComputerMove {
                                 Board board,
                                 GameManager game,
                                 int[] StartPosition,
-                                int countTurns
+                                int countTurns,
+                                Player currentPlayer,
+                                Bag bag
                                 ) {
 
         // The idea os the algoritmo is that if it detect a word, so it is moving like this:
@@ -185,7 +188,44 @@ public class ComputerMove {
                 Set<String> newlyPlacedCells = new HashSet<>();
                 char[][] boardBefore = board.snapshotLetters();
                 boolean CheckPlaceWord = board.placeWord(validWord, position, StartPosition, countTurns, newlyPlacedCells, EmptyMapWord);
-                                                                                                     
+                
+                if (!CheckPlaceWord) {
+                    // Invalid words - keep same player's turn
+                    // Need to store the board as the placeWord method is adding the word to the board
+                    board.restoreLetters(boardBefore);
+                    //game.showInvalidMoveMessage(validWord, position);
+                    continue;
+                }
+
+                // 2 Step 2: Get the word generate in the board.
+                WordCells WordCellsPlayer = board.getWordAt(position);
+                String WordPlayer = WordCellsPlayer.word;
+                List<int[]> WordPlayerCells = WordCellsPlayer.cells;
+
+                // 3 Step 3: Check if the word generate is validate in the WordList.
+                boolean CheckWordPlayer = WordList.isValidWord(WordPlayer);
+                if (!CheckWordPlayer) {
+                    continue;
+                }
+
+                // 4 Step 4: Getting the new word with the movement of the player.
+                Map<String, Integer> MapWordAfter = board.getAllWordsOnBoard();
+
+                // If it was generated more than 1 word based on the new word, i need to cancel the movement and going back to the previous board.
+                boolean ValidatedMovement = board.isValidMove(MapWordBefore, MapWordAfter);
+                if (!ValidatedMovement) {
+                    // First - Restorate the movement 
+                    // Solve - It provide a restore the board when the movement is not 100%, as create more currence than it is allowed. 
+                    board.restoreLetters(boardBefore);
+                    continue;
+                }
+                
+                // 5 Step 5: Count the point if the movement was sucesseed.
+                String RowInputPlayerWord = validWord;
+                Integer ScorePlayerTurn = game.scoreWord(board, WordCellsPlayer, newlyPlacedCells, RowInputPlayerWord);
+                currentPlayer.addScore(ScorePlayerTurn);
+                currentPlayer.refillRack(bag);      
+                                                                                      
               }  
 
             }                                                           
