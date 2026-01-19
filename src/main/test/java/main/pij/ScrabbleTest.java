@@ -9,8 +9,11 @@ import main.pij.model.Cell;
 import main.pij.model.Board;
 import main.pij.model.Player;
 import main.pij.model.WordList;
+import main.pij.utils.WordPermutations;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ScrabbleTest {
 
@@ -113,8 +116,10 @@ public class ScrabbleTest {
             Cell [][] cells_board = board.getBoard();
             int[] startPos = board.getStartPosition();
             System.out.println("Start position: (" + startPos[0] + ", " + startPos[1] + ")");
+            System.out.println("--------------------------------------");
         } catch (Exception e) {
             fail("Exception error: " + e.getMessage());
+            System.out.println("--------------------------------------");
         }
     }
 
@@ -141,6 +146,19 @@ public class ScrabbleTest {
         System.out.println(wordIsList);
         assertEquals(true, wordIsList); // Check board size
         System.out.println("--------------------------------------");
+    }
+
+    @Test 
+    public void testPermutationWord() {
+        System.out.println("testPermutationWord");
+        Set<String> result = new HashSet<>();
+        WordPermutations.permuteLenN("abcd", "", result, 2   );
+        System.out.println("Total: " + result.size());
+        System.out.println(result);
+        assertEquals(12, result.size()); // Check board size
+        System.out.println("--------------------------------------");
+
+    
     }
 
 
