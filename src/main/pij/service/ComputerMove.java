@@ -76,7 +76,7 @@ public class ComputerMove {
         return null;  // No valid word found
     }
 
-    public void SearchMove(int currentPlayerNum, 
+    public boolean SearchMove(int currentPlayerNum, 
                            Board board, 
                            List<Tile> Tiles,
                            GameManager game,
@@ -108,23 +108,25 @@ public class ComputerMove {
                             wordBoard = wordBoard + cells[row][endCol].getLetter();                                                                                                
                             endCol++;                                                                                                                                       
                         };  
-                        System.out.println("Word: " + wordBoard);                                                                                                  
-                        System.out.println("Row: " + row + ", Start Col: " + col);                                                                                 
                                                                                                                                                                    
                         // Skip to end of word                                                                                                                     
                         endCol--;   
                         int startCol = col;      
                         
                         // Algorthimo to iterate based on the word
-                        IterationSearch(wordBoard, row, startCol, endCol, Tiles, board, game, StartPosition, countTurns, currentPlayer, bag);
+                        boolean CheckCondition = IterationSearch(wordBoard, row, startCol, endCol, Tiles, board, game, StartPosition, countTurns, currentPlayer, bag);
+                        if (CheckCondition) {                                                                                                                              
+                            return true;  // Ya encontró, parar                                                                                                   
+                        }   
                     }                                                                                                                
                 }                   
             }                                                                                                                                                       
-        
         }
+        return false; 
+
     }
 
-    public void IterationSearch(String word, 
+    public boolean IterationSearch(String word, 
                                 int row, 
                                 int startCol, 
                                 int endCol , 
@@ -155,7 +157,6 @@ public class ComputerMove {
         for (Tile tile : Tiles) {                                                                                                                             
             myTiles += tile.getLetter();                                                                                                                      
         }         
-        System.out.println(myTiles);
         int MaxTiles = Tiles.size();
         for (int tilesBefore = 0; tilesBefore <= MaxTiles; tilesBefore++) {                                                                                   
             for (int tilesAfter = 0; tilesAfter <= MaxTiles - tilesBefore; tilesAfter++) {              
@@ -224,13 +225,15 @@ public class ComputerMove {
                 String RowInputPlayerWord = validWord;
                 Integer ScorePlayerTurn = game.scoreWord(board, WordCellsPlayer, newlyPlacedCells, RowInputPlayerWord);
                 currentPlayer.addScore(ScorePlayerTurn);
-                currentPlayer.refillRack(bag);      
+                currentPlayer.refillRack(bag);    
+                return true;  
                                                                                       
               }  
 
-            }                                                           
+            }
 
         }
+        return false; 
     }
 
     private void tryAllCombinations(String pattern, String availableTiles, int index, String current, List<String> validWords) {                               

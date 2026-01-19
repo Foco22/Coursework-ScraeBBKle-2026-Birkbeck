@@ -328,18 +328,27 @@ public class Main {
                         game.nextTurn();    
 
                     } 
-                
                 }
-
-                // Stop the game for testing
-                if (countTurns >= 1 ){
-                    gameRunning = false;
+                else {
+                    // Stop the game for testing
+                    if (countTurns > 1 ){
+                        gameRunning = false;
+                    }
+                    
+                    ComputerMove computerMove = new ComputerMove(player1, player2);
+                    List<Tile> PlayerTiles = currentPlayer.getRack();
+                    int[] StartPosition = board.getStartPosition();
+                    boolean CheckMove = computerMove.SearchMove(currentPlayerNum, board, PlayerTiles, game, StartPosition, countTurns, currentPlayer, bag);
+                    if (CheckMove) {                                                                                                                                          
+                        System.out.println("Computer played successfully!");                                                                                                  
+                        game.nextTurn();                                                                                                                                      
+                    }                                                                                                                                                         
+                    else {                                                                                                                                                    
+                        System.out.println("Computer passes - no valid move found");                                                                                          
+                        game.nextTurn();                                                                                                                                      
+                        continue;                                                                                                                                             
+                    }                                                                                                                                                         
                 }
-                
-                ComputerMove computerMove = new ComputerMove(player1, player2);
-                List<Tile> PlayerTiles = currentPlayer.getRack();
-                int[] StartPosition = board.getStartPosition();
-                computerMove.SearchMove(currentPlayerNum, board, PlayerTiles, game, StartPosition, countTurns);
 
                 //gameRunning = false;
                 
