@@ -92,10 +92,10 @@ public class Main {
 
         // 4. Initialize bag and draw tiles
         Bag bag = new Bag();
-        //player1.initialDraw(bag);
-        //player2.initialDraw(bag);
-        player1.setDummyRack();
-        player2.setDummyRack();
+        player1.initialDraw(bag);
+        player2.initialDraw(bag);
+        //player1.setDummyRack();
+        //player2.setDummyRack();
 
 
         // Create game manager
@@ -206,7 +206,6 @@ public class Main {
                 // 6 Step 6: Getting the new word with the movement of the player.
                 Map<String, Integer> MapWordAfter = board.getAllWordsOnBoard();
 
-                System.out.println(MapWordAfter);
                 // If it was generated more than 1 word based on the new word, i need to cancel the movement and going back to the previous board.
                 boolean ValidatedMovement = board.isValidMove(MapWordBefore, MapWordAfter);
                 if (!ValidatedMovement) {
@@ -257,6 +256,8 @@ public class Main {
                         continue;
                     }    
                     else {
+                        // Work but if the word is more big than the start postion can be not work this logic, as i need to keep moving and see if it can 
+                        // find a better way if i have time. 
                         int[] StartPosition = board.getStartPosition();
                         String word = PlayerWord;
                         String position = board.getStartPositionAsString();
@@ -276,18 +277,54 @@ public class Main {
                             continue;
                         }
 
-                        // 4 Step 4: Get the word generate in the board.
+                        // 2 Step 2: Get the word generate in the board.
                         WordCells WordCellsPlayer = board.getWordAt(position);
                         String WordPlayer = WordCellsPlayer.word;
                         List<int[]> WordPlayerCells = WordCellsPlayer.cells;
 
+                        // 3 Step 3: Getting the new word with the movement of the player.
+                        Map<String, Integer> MapWordAfter = board.getAllWordsOnBoard();
+
+                        // 4 Step 4: It is case, it can be not neccesary to do this, as it is the virst word and it was validate before, but i want to keep
+                        // the logic.
+                        boolean ValidatedMovement = board.isValidMove(MapWordBefore, MapWordAfter);
+                        if (!ValidatedMovement) {
+                            // First - Restorate the movement 
+                            // Solve - It provide a restore the board when the movement is not 100%, as create more currence than it is allowed. 
+                            board.restoreLetters(boardBefore);
+                            game.showInvalidMoveMessage(PlayerWord, position);
+                            continue;
+                        }
+        
+                        // 5 Step 5: Count the point if the movement was sucesseed.
+                        String RowInputPlayerWord = PlayerWord;
+                        Integer ScorePlayerTurn = game.scoreWord(board, WordCellsPlayer, newlyPlacedCells, RowInputPlayerWord);
+                        currentPlayer.addScore(ScorePlayerTurn);
+                        currentPlayer.refillRack(bag);      
+                        
+                        // 7 Step 7: Show the results and the movement.
+                        game.showMoveResult(WordPlayer, position, ScorePlayerTurn);
+
+                        // 8 Step 8: Condition of finishing the game or going to the next player.
+                        // If the bag is empty and one of the player has a empty rack.
+                        if (bag.isEmpty() && (player1.countTilesInRack() == 0 || player2.countTilesInRack() == 0)) {
+                            System.out.println("Game over: bag is empty and a player has an empty rack.");
+                            break;
+                        }
+                        // If SkipTurn Player 2 and 1 is more than 2 for both.
+                        if (skipTurnPlayer2 >= 2 && skipTurnPlayer1 >= 2) {
+                            break;
+                        }
+
+                        // Valid move - continue to next turn
+                        game.nextTurn();    
 
                     }
                 }
 
 
 
-                gameRunning = false;
+                //gameRunning = false;
                 
                 
             }
