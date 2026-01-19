@@ -12,6 +12,7 @@ import main.pij.service.GameManager;
 
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -33,18 +34,34 @@ public class ComputerMove {
     public void FirstMove(int currentPlayerNum) {
 
         if (currentPlayerNum == 1) {
+            String playerWords = "";
             List<Tile> PlayerRack = player1.getRack();
             System.out.println("Player rack:");
             for (Tile tile : PlayerRack) {
                 System.out.println(tile);
+                playerWords += tile.getLetter();
             }
+            System.out.println("------------------------------------------");
+            System.out.println(playerWords);
+            Set<String> result = new HashSet<>();                                                                                                                     
+            WordPermutations.permuteLenN(playerWords, "", result, 2); 
+            System.out.println(result);
+            
+
         } 
         else {
-            List<Tile> PlayerRack = player1.getRack();
+
+            String playerWords = "";
+            List<Tile> PlayerRack = player2.getRack();
             System.out.println("Player rack:");
             for (Tile tile : PlayerRack) {
                 System.out.println(tile);
+                playerWords += tile.getLetter();
             }
+            System.out.println(playerWords);
+            Set<String> result = new HashSet<>();                                                                                                                     
+            WordPermutations.permuteLenN(playerWords, "", result, 2); 
+            System.out.println(result);
         }
     }
     
