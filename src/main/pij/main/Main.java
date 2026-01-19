@@ -76,12 +76,12 @@ public class Main {
         //  Players
         System.out.print("Player 1 - Enter 'h' for human or 'c' for computer: ");
         // char player1Type = scanner.nextLine().trim().toLowerCase().charAt(0);
-        char player1Type = 'h';
+        char player1Type = 'c';
         Player player1 = new Player(1, player1Type);
 
         System.out.print("Player 2 - Enter 'h' for human or 'c' for computer: ");
         //char player2Type = scanner.nextLine().trim().toLowerCase().charAt(0);
-        char player2Type = 'h';
+        char player2Type = 'c';
         Player player2 = new Player(2, player2Type);
 
         // 3. Game type (it is still not used the class, but we prepare the input)
@@ -245,8 +245,7 @@ public class Main {
 
             // Logic to a COMPUTER player - 
             else {
-
-
+                gameRunning = false;
             }
         
         
