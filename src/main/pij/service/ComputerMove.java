@@ -158,8 +158,11 @@ public class ComputerMove {
             myTiles += tile.getLetter();                                                                                                                      
         }         
         int MaxTiles = Tiles.size();
-        for (int tilesBefore = 0; tilesBefore <= MaxTiles; tilesBefore++) {                                                                                   
-            for (int tilesAfter = 0; tilesAfter <= MaxTiles - tilesBefore; tilesAfter++) {              
+        for (int tilesBefore = 0; tilesBefore <= MaxTiles; tilesBefore++) {
+            for (int tilesAfter = 0; tilesAfter <= MaxTiles - tilesBefore; tilesAfter++) {
+
+              // Skip if no tiles to place
+              if (tilesBefore + tilesAfter == 0) continue;
 
               // Calcular nueva posición                                                                                                                    
               int newStartCol = startCol - tilesBefore;                                                                                                     
@@ -182,8 +185,10 @@ public class ComputerMove {
                 Map<String, Integer> MapWordBefore = board.getAllWordsOnBoard();
                 boolean EmptyMapWord = game.CheckEmptyMapWord(MapWordBefore);
 
-                // Define start position
-                String position = "" + (char)('a' + newStartCol) + (row + 1);  // Ejemplo: "e5"   
+                // Define start position (horizontal: number+letter like "5e")
+                String position = "" + (row + 1) + (char)('a' + newStartCol);
+
+                System.out.println("DEBUG: Trying word '" + validWord + "' at position '" + position + "'");
 
                 // Step 1: Put the word in the board.
                 Set<String> newlyPlacedCells = new HashSet<>();
@@ -206,6 +211,7 @@ public class ComputerMove {
                 // 3 Step 3: Check if the word generate is validate in the WordList.
                 boolean CheckWordPlayer = WordList.isValidWord(WordPlayer);
                 if (!CheckWordPlayer) {
+                    board.restoreLetters(boardBefore);
                     continue;
                 }
 
