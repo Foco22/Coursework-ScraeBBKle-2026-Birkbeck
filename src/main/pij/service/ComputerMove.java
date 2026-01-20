@@ -33,7 +33,6 @@ public class ComputerMove {
 
     public String FirstMoveWord(int currentPlayerNum) {
 
-        System.out.println("currentPlayerNum");
         String playerWords = "";                                                                                                                              
         List<Tile> PlayerRack;                                                                                                                                
                                   
@@ -44,9 +43,7 @@ public class ComputerMove {
             PlayerRack = player2.getRack();
         }
 
-        System.out.println("Player rack:");
         for (Tile tile : PlayerRack) {
-            System.out.println(tile);
             playerWords += tile.getLetter();
         }
 
@@ -90,46 +87,43 @@ public class ComputerMove {
         Cell[][] cells = board.getBoard();    
                                                                                                                
         // First: iterate HORIZONTALLY (each row, left to right)                                                                                                
-        //for (int row = 0; row < cells.length; row++) {                                                                                                          
-        //    for (int col = 0; col < cells[row].length; col++) {                                                                                                 
-        //        Cell cell = cells[row][col];  
-        //        char letter = cell.getLetter();                                                                                                                    
-        //
-        //        if (letter != '.') {                                                                                                                               
-        //
-        //            // Get the word and the Start and final position. This is the word that i get and now i need to use it to work with my rack                                                                          
-        //            boolean isWordStart = (letter != '.') &&                                                                                                           
-        //            (col == 0 || cells[row][col - 1].getLetter() == '.');                                                                        
-        //                                                                                                                                                
-        //            if (isWordStart) {                                                                                                                                 
-        //                                                                                                                
-        //                String wordBoard = "";                                                                                                      
-        //                int endCol = col;                                                                                                                                  
-        //                while (endCol < cells[row].length && cells[row][endCol].getLetter() != '.') {                                                                            
-        //                    wordBoard = wordBoard + cells[row][endCol].getLetter();                                                                                                
-        //                    endCol++;                                                                                                                                       
-        //                };  
+        for (int row = 0; row < cells.length; row++) {                                                                                                          
+            for (int col = 0; col < cells[row].length; col++) {                                                                                                 
+                Cell cell = cells[row][col];  
+                char letter = cell.getLetter();                                                                                                                    
+        
+                if (letter != '.') {                                                                                                                               
+        
+                    // Get the word and the Start and final position. This is the word that i get and now i need to use it to work with my rack                                                                          
+                    boolean isWordStart = (letter != '.') &&                                                                                                           
+                    (col == 0 || cells[row][col - 1].getLetter() == '.');                                                                        
+                                                                                                                                                        
+                    if (isWordStart) {                                                                                                                                 
+                                                                                                                        
+                        String wordBoard = "";                                                                                                      
+                        int endCol = col;                                                                                                                                  
+                        while (endCol < cells[row].length && cells[row][endCol].getLetter() != '.') {                                                                            
+                            wordBoard = wordBoard + cells[row][endCol].getLetter();                                                                                                
+                            endCol++;                                                                                                                                       
+                        };  
                                                                                                                                                                    
                         // Skip to end of word                                                                                                                     
-        //                endCol--;   
-        //                int startCol = col;      
+                        endCol--;   
+                        int startCol = col;      
                         
                         // Algorthimo to iterate based on the word
-        //                boolean CheckCondition = IterationSearch(wordBoard, row, startCol, endCol, Tiles, board, game, StartPosition, countTurns, currentPlayer, bag);
-        //                if (CheckCondition) {                                                                                                                              
-        //                    return true;  // Ya encontró, parar                                                                                                   
-        //                }   
-        //            }                                                                                                                
-        //        }                   
-        //    }                                                                                                                                                       
-        //}
+                        boolean CheckCondition = IterationSearch(wordBoard, row, startCol, endCol, Tiles, board, game, StartPosition, countTurns, currentPlayer, bag);
+                        if (CheckCondition) {                                                                                                                              
+                            return true;  // Ya encontró, parar                                                                                                   
+                        }   
+                    }                                                                                                                
+                }                   
+            }                                                                                                                                                       
+        }
         
 
         //Second : iterate VERTICAALLY (each column, left to right) 
 
-        System.out.println("--------------------------------D");
-        System.out.println(cells);
-        
         for (int column = 0; column < cells.length; column++) {                                                                                                          
             for (int row = 0; row < cells.length; row++) {                                                                                                 
                 Cell cell = cells[row][column];  
@@ -153,8 +147,6 @@ public class ComputerMove {
                         // Skip to end of word                                                                                                                     
                         endRow--;   
                         int startRow = row;      
-                        
-                        System.out.println("--------------------------------D");
 
                         // Algorthimo to iterate based on the word
                         boolean CheckCondition = IterationSearchVertical(wordBoard, column, startRow, endRow, Tiles, board, game, StartPosition, countTurns, currentPlayer, bag);
@@ -224,13 +216,8 @@ public class ComputerMove {
               // Build pattern: "___" + word + "__"                                                                                                         
               String pattern = "_".repeat(tilesBefore) + word + "_".repeat(tilesAfter);                                                                     
               List<String> validWords = new ArrayList<>();  
-              System.out.println(pattern);
 
               tryAllCombinations(pattern, myTiles, 0, "", validWords);  
-              
-              System.out.println(validWords);
-              System.out.println("--------------------------------");
-
                                                                                                                                                                           
               // Start the validate the word. 
               for (String validWord : validWords) {                                                                                                         
@@ -240,8 +227,6 @@ public class ComputerMove {
 
                 // Define start position (Vertical: number+letter like "5e")
                 String position = "" + (char)('a' + column) + (newStartRow + 1); 
-
-                System.out.println("DEBUG: Trying word '" + validWord + "' at position '" + position + "'");
 
                 // Step 1: Put the word in the board.
                 Set<String> newlyPlacedCells = new HashSet<>();
@@ -345,7 +330,6 @@ public class ComputerMove {
               // Build pattern: "___" + word + "__"                                                                                                         
               String pattern = "_".repeat(tilesBefore) + word + "_".repeat(tilesAfter);                                                                     
               List<String> validWords = new ArrayList<>();  
-              System.out.println(pattern);
 
               tryAllCombinations(pattern, myTiles, 0, "", validWords);                                                                                      
                                                                                                                                                                           
@@ -357,8 +341,6 @@ public class ComputerMove {
 
                 // Define start position (horizontal: number+letter like "5e")
                 String position = "" + (row + 1) + (char)('a' + newStartCol);
-
-                System.out.println("DEBUG: Trying word '" + validWord + "' at position '" + position + "'");
 
                 // Step 1: Put the word in the board.
                 Set<String> newlyPlacedCells = new HashSet<>();

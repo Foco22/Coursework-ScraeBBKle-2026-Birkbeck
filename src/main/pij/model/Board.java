@@ -76,8 +76,6 @@ public class Board {
             this.rows = Integer.parseInt(lines.get(1).trim());
             validateDimensions(columns, rows);  // Validar dimensiones
             this.startPosition = parseStartPosition(lines.get(2).trim());
-            System.out.println("Start position parsed:" + startPosition[0] + "," + startPosition[1]);
-
             this.board = new Cell[rows][columns];
             initializeBoard();
         }   
@@ -204,11 +202,9 @@ public class Board {
      * Show the board in the console.
     */
     public void showBoard(Bag bag) {
-        System.out.print("   ");
         for (int col = 0; col < columns; col++) {
             System.out.printf("%4c", (char)('a' + col));
         }
-        System.out.println();
     
         for (int row = 0; row < rows; row++) {
             System.out.printf("%2d ", row + 1);
