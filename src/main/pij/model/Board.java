@@ -205,6 +205,7 @@ public class Board {
         for (int col = 0; col < columns; col++) {
             System.out.printf("%4c", (char)('a' + col));
         }
+        System.out.println();
     
         for (int row = 0; row < rows; row++) {
             System.out.printf("%2d ", row + 1);

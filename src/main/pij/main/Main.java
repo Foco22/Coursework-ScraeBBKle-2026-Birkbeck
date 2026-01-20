@@ -269,7 +269,7 @@ public class Main {
                         int[] StartPosition = board.getStartPosition();
                         String word = PlayerWord;
                         String position = board.getStartPositionAsString();
-                        
+
                         // Step 1: Put the eord, using the Start postion as the position of the default
                         Set<String> newlyPlacedCells = new HashSet<>();
                         char[][] boardBefore = board.snapshotLetters();
@@ -343,7 +343,15 @@ public class Main {
                     }                                                                                                                                                         
                     else {                                                                                                                                                    
                         System.out.println("Computer passes - no valid move found");                                                                                          
-                        game.nextTurn();                                                                                                                                      
+                        if (currentPlayerNum == 1) {
+                            skipTurnPlayer1++;                        
+                        } else {
+                            skipTurnPlayer2++;
+                        }
+                        game.nextTurn();
+                        System.out.println(skipTurnPlayer1);
+                        System.out.println(skipTurnPlayer2);
+                        
                         continue;                                                                                                                                             
                     }                                                                                                                                                         
                 }
