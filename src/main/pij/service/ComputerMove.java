@@ -85,7 +85,7 @@ public class ComputerMove {
                            Player currentPlayer,
                            Bag bag
                            ) {
-                            
+
 
         Cell[][] cells = board.getBoard();    
                                                                                                                
@@ -124,27 +124,42 @@ public class ComputerMove {
         //    }                                                                                                                                                       
         //}
         
+
+        //Second : iterate VERTICAALLY (each column, left to right)                                                                                                
+        for (int row = 0; row < cells.length; row++) {                                                                                                          
+            for (int col = 0; col < cells[row].length; col++) {                                                                                                 
+                Cell cell = cells[row][col];  
+                char letter = cell.getLetter();                                                                                                                    
         
+                if (letter != '.') {                                                                                                                               
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+                    // Get the word and the Start and final position. This is the word that i get and now i need to use it to work with my rack                                                                          
+                    boolean isWordStart = (letter != '.') &&                                                                                                           
+                    (col == 0 || cells[row][col - 1].getLetter() == '.');                                                                        
+                                                                                                                                                        
+                    if (isWordStart) {                                                                                                                                 
+                                                                                                                        
+                        String wordBoard = "";                                                                                                      
+                        int endCol = col;                                                                                                                                  
+                        while (endCol < cells[row].length && cells[row][endCol].getLetter() != '.') {                                                                            
+                            wordBoard = wordBoard + cells[row][endCol].getLetter();                                                                                                
+                            endCol++;                                                                                                                                       
+                        };  
+                                                                                                                                                                   
+                        // Skip to end of word                                                                                                                     
+                        endCol--;   
+                        int startCol = col;      
+                        
+                        // Algorthimo to iterate based on the word
+                        boolean CheckCondition = IterationSearch(wordBoard, row, startCol, endCol, Tiles, board, game, StartPosition, countTurns, currentPlayer, bag);
+                        if (CheckCondition) {                                                                                                                              
+                            return true;  // Ya encontró, parar                                                                                                   
+                        }   
+                    }                                                                                                                
+                }                   
+            }                                                                                                                                                       
+        }
+    
         
         return false; 
 
