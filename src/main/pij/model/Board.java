@@ -340,7 +340,14 @@ public class Board {
 
             // Check if cell already has a letter
             if (!board[currentRow][currentCol].isEmpty()) {
-                // Cell has a letter - skip this board position, don't consume word letter
+
+                // Solve the bug using this logic for horizantal
+                char existingLetter = Character.toUpperCase(board[currentRow][currentCol].getLetter());
+                char wordLetter = Character.toUpperCase(word.charAt(wordIndex));
+                if (existingLetter != wordLetter) {
+                    return false;  // Not match, so it return false
+                }
+                wordIndex++;
                 boardOffset++;
                 continue;
             }

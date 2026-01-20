@@ -331,9 +331,9 @@ public class Main {
                 }
                 else {
                     // Stop the game for testing
-                    if (countTurns > 1 ){
-                        gameRunning = false;
-                    }
+                    //if (countTurns > 1 ){
+                    //    gameRunning = false;
+                    //}
                     
                     ComputerMove computerMove = new ComputerMove(player1, player2);
                     List<Tile> PlayerTiles = currentPlayer.getRack();

@@ -186,9 +186,12 @@ public class ComputerMove {
                                 ) {
 
         // The idea os the algoritmo is that if it detect a word, so it is moving like this:
+        // 
         // R
-        // R_
-        // R_ _
+        // _
+        // R
+        // R
+        
         // R _ _ _
         // when it is finish i go to the 
         // _ R_
