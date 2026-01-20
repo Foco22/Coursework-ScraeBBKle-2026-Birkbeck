@@ -93,10 +93,10 @@ public class Main {
 
         // 4. Initialize bag and draw tiles
         Bag bag = new Bag();
-        player1.initialDraw(bag);
-        player2.initialDraw(bag);
-        //player1.setDummyRack();
-        //player2.setDummyRack();
+        //player1.initialDraw(bag);
+        //player2.initialDraw(bag);
+        player1.setDummyRack();
+        player2.setDummyRack2();
 
 
         // Create game manager

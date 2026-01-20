@@ -38,10 +38,14 @@ public class Player {
      */
     public void setDummyRack() {
         rack.clear();
-        rack.add(new Tile('R', 1));
-        rack.add(new Tile('U', 1));
-        rack.add(new Tile('_', 8));
+        rack.add(new Tile('A', 1));
+        rack.add(new Tile('A', 1));
 
+    }
+
+    public void setDummyRack2() {
+        rack.clear();
+        rack.add(new Tile('H', 1));
     }
 
     /**

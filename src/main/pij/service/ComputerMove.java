@@ -125,9 +125,13 @@ public class ComputerMove {
         //}
         
 
-        //Second : iterate VERTICAALLY (each column, left to right)                                                                                                
+        //Second : iterate VERTICAALLY (each column, left to right) 
+
+        System.out.println("--------------------------------D");
+        System.out.println(cells);
+        
         for (int column = 0; column < cells.length; column++) {                                                                                                          
-            for (int row = 0; row < cells[row].length; row++) {                                                                                                 
+            for (int row = 0; row < cells.length; row++) {                                                                                                 
                 Cell cell = cells[row][column];  
                 char letter = cell.getLetter();                                                                                                                    
         
@@ -150,6 +154,8 @@ public class ComputerMove {
                         endRow--;   
                         int startRow = row;      
                         
+                        System.out.println("--------------------------------D");
+
                         // Algorthimo to iterate based on the word
                         boolean CheckCondition = IterationSearchVertical(wordBoard, column, startRow, endRow, Tiles, board, game, StartPosition, countTurns, currentPlayer, bag);
                         if (CheckCondition) {                                                                                                                              
@@ -217,7 +223,11 @@ public class ComputerMove {
               List<String> validWords = new ArrayList<>();  
               System.out.println(pattern);
 
-              tryAllCombinations(pattern, myTiles, 0, "", validWords);                                                                                      
+              tryAllCombinations(pattern, myTiles, 0, "", validWords);  
+              
+              System.out.println(validWords);
+              System.out.println("--------------------------------");
+
                                                                                                                                                                           
               // Start the validate the word. 
               for (String validWord : validWords) {                                                                                                         
