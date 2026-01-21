@@ -96,7 +96,6 @@ public class Main {
         //player1.initialDraw(bag);
         //player2.initialDraw(bag);
         player1.setDummyRack();
-        player2.setDummyRack2();
 
 
         // Create game manager

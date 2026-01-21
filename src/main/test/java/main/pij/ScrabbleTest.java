@@ -161,5 +161,19 @@ public class ScrabbleTest {
     
     }
 
+    @Test 
+    public void testDummyTiles() {
+        System.out.println("testDummyTiles");
+        char player1Type = 'h';
+        Player player1 = new Player(1, player1Type);
+        player1.setDummyRack();
+        int CountTiles = player1.countTilesInRack();
+        System.out.println(CountTiles);
+
+        assertEquals(2, CountTiles); // Check board size
+        System.out.println("--------------------------------------");
+
+    
+    }
 
 }

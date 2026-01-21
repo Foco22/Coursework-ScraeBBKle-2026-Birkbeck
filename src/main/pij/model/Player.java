@@ -43,11 +43,6 @@ public class Player {
 
     }
 
-    public void setDummyRack2() {
-        rack.clear();
-        rack.add(new Tile('H', 1));
-    }
-
     /**
      * Draw tiles to refill rack to 7 tiles.
      */
