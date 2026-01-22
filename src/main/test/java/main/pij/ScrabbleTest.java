@@ -176,4 +176,16 @@ public class ScrabbleTest {
     
     }
 
+    @Test 
+    public void testsSizeinitializeTiles() {
+        System.out.println("testsSizeinitializeTiles");
+        Bag bag = new Bag();
+        int size = bag.tilesRemaining();
+        System.out.println(size);
+        assertEquals(100, size); // Check board size
+        System.out.println("--------------------------------------");
+
+    
+    }
+
 }

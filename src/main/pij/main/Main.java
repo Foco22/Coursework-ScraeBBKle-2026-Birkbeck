@@ -252,7 +252,7 @@ public class Main {
                 Map<String, Integer> MapWordBefore = board.getAllWordsOnBoard();
                 boolean EmptyMapWord = game.CheckEmptyMapWord(MapWordBefore);
 
-                
+                // First movement: If the Board is empty, so the movement is different than the other movement,
                 if (EmptyMapWord) {
                     ComputerMove computerMove = new ComputerMove(player1, player2);                                                                  
                     String PlayerWord = computerMove.FirstMoveWord(currentPlayerNum);  
@@ -354,7 +354,6 @@ public class Main {
                         game.nextTurn();                                                                                                                                      
                     }                                                                                                                                                         
                     else {                                                                                                                                                    
-                        System.out.println("Computer passes - no valid move found");                                                                                          
                         if (currentPlayerNum == 1) {
                             skipTurnPlayer1++;                        
                         } else {
