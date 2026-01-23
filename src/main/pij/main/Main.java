@@ -337,10 +337,11 @@ public class Main {
                     List<Tile> PlayerTiles = currentPlayer.getRack();
                     int[] StartPosition = board.getStartPosition();
                     boolean CheckMove = computerMove.SearchMove(currentPlayerNum, board, PlayerTiles, game, StartPosition, countTurns, currentPlayer, bag);
-                    
+                    System.out.println(countTurns);
+                    System.out.println("-------------------------Count");
                     board.showBoard(bag);
 
-                    if (countTurns > 1 ){
+                    if (countTurns >= 1 ){
                         gameRunning = false;
                     }
                     

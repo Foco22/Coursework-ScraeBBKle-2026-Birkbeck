@@ -401,17 +401,30 @@ public class ComputerMove {
             return;                                                                                                                                            
         }                                                                                                                                                      
                                                                                                                                                                
-        char c = pattern.charAt(index);      
-        System.out.println(availableTiles);                                                                                                  
+        char c = pattern.charAt(index);  
+        System.out.println("---------------------------");                                                                                                                    
+        System.out.println(availableTiles);  
+        System.out.println("REVIEW");     
+        System.out.println("pattern");   
+        System.out.println(pattern);   
+        
+                                                                                                           
         if (c == '_') {                                                                                                                                        
             // Try each letter                                                                                                                
             for (int i = 0; i < availableTiles.length(); i++) {         
-
-                char tile = availableTiles.charAt(i);     
-                System.out.println(tile);                                                                                                    
-                // Must remove a element of the tile, so it can not count it again.                                                                                                          
-                String remaining = availableTiles.substring(0, i) + availableTiles.substring(i + 1);                                                           
-                tryAllCombinations(pattern, remaining, index + 1, current + tile, validWords);                                                                 
+                // Commodin is the same that the patrom, so it need to make a for from a to Z, to get all the possible values to this element
+                char tile = availableTiles.charAt(i); 
+                String remaining = availableTiles.substring(0, i) + availableTiles.substring(i + 1);      
+                if  (tile == '_') {  
+                    for (char letter = 'a'; letter <= 'z'; letter++) {
+                        // Comodin tile                          
+                        tryAllCombinations(pattern, remaining, index + 1, current + letter, validWords);  
+                    }
+                }
+                else {
+                    // Normal tile                                                                                                        
+                    tryAllCombinations(pattern, remaining, index + 1, current + tile, validWords);  
+                }                                                               
             }                                                                                                                                                  
         } else {                                                                                                                                               
             // If the letter is from board, i move on it.                                                                                                       
