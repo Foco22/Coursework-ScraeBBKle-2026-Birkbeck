@@ -333,6 +333,7 @@ public class ScrabbleTest {
             int result = game.unplayedTilesValue(player1);                                                                                                              
                                                                                                                                                                   
             System.out.println("Unplayed tiles value: " + result);
+            assertEquals(9, result); 
             System.out.println("--------------------------------------");
 
         }
