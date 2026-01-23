@@ -295,5 +295,28 @@ public class ScrabbleTest {
         System.out.println("--------------------------------------");
     }
 
+        // - Test 19
+        @Test
+        public void testAreAllWordsValidFalse() {
+                                                                                                                  
+            System.out.println("testAreAllWordsValidFalse");                                                                                                     
+            WordList.loadWords();                                                                                                                                       
+                                                                                                                                                                        
+            Board board = new Board(14, 14);                                                                                                                            
+            Player player1 = new Player(1, 'c');                                                                                                                        
+            Player player2 = new Player(2, 'c');                                                                                                                        
+            Bag bag = new Bag();                                                                                                                                        
+            GameManager game = new GameManager(board, player1, player2, bag, "o");  
+    
+            Map<String, Integer> wordsOnBoard = new HashMap<>();   
+            // Way to simplify than using the method placeWord.                                                                                                     
+            wordsOnBoard.put("AAAAAAA", 1);                                                                                                                              
+                                                                                                                                                                        
+            boolean result = game.areAllWordsValid(wordsOnBoard);  
+            System.out.println(result);
+            assertEquals(false, result); // Check board size
+            System.out.println("--------------------------------------");
+        }
+    
 
 }
