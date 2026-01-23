@@ -404,7 +404,7 @@ public class ComputerMove {
     }
 
 
-    private void tryAllCombinations(String pattern, String availableTiles, int index, String current, List<String> validWords) {                               
+    public void tryAllCombinations(String pattern, String availableTiles, int index, String current, List<String> validWords) {                               
  
         if (index == pattern.length()) {                                                                                                                       
             // Check if valid word                                                                                                                             
@@ -415,12 +415,7 @@ public class ComputerMove {
         }                                                                                                                                                      
                                                                                                                                                                
         char c = pattern.charAt(index);  
-        System.out.println("---------------------------");                                                                                                                    
-        System.out.println(availableTiles);  
-        System.out.println("REVIEW");     
-        System.out.println("pattern");   
-        System.out.println(pattern);   
-        
+
                                                                                                            
         if (c == '_') {                                                                                                                                        
             // Try each letter                                                                                                                

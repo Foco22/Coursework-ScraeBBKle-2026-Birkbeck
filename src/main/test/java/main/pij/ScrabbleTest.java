@@ -193,17 +193,17 @@ public class ScrabbleTest {
     @Test
     public void testtryAllCombinations() {
         System.out.println("testtryAllCombinations");
+        WordList.loadWords();  
         String pattern = "A_";                                                                                                                                      
         String availableTiles = "A";        
         Player player1 = new Player(1, 'c');                                                                                                                        
         Player player2 = new Player(2, 'c');    
         ComputerMove cm =  new ComputerMove(player1, player2);                                                                                                                      
-        List<String> validWords = new ArrayList<>();                                                                                                                
-                                                                                                                                                                    
-        cm.tryAllCombinations(pattern, availableTiles, 0, "", validWords);                                                                                          
-                                                                                                                                                                    
-        System.out.println(validWords);  // e.g. [AH, AL, AS]                                                                                                       
-        assertFalse(validWords.isEmpty());    
+        List<String> validWords = new ArrayList<>();                                                                                                                                                                                                                                                        
+        cm.tryAllCombinations(pattern, availableTiles, 0, "", validWords);                                                                                                                                                                                                                                                              
+        System.out.println("Valid Word Size");
+        System.out.println(validWords.size());  // e.g. [AH, AL, AS]  
+        assertEquals(1, validWords.size()); // Check board size
 
     }
 }
