@@ -291,11 +291,9 @@ public class ScrabbleTest {
                                                                                                                                                                     
         boolean result = game.areAllWordsValid(wordsOnBoard);  
         System.out.println(result);
-
+        assertEquals(true, result); // Check board size
         System.out.println("--------------------------------------");
-
     }
-
 
 
 }
