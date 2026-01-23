@@ -204,6 +204,22 @@ public class ScrabbleTest {
         System.out.println("Valid Word Size");
         System.out.println(validWords.size());  // e.g. [AH, AL, AS]  
         assertEquals(1, validWords.size()); // Check board size
+        System.out.println("--------------------------------------");
+
+    }
+
+    @Test
+    public void testFirstMoveWord() {
+        System.out.println("testFirstMoveWord");
+        int currentPlayerNum = 1; 
+        WordList.loadWords();        
+        Player player1 = new Player(1, 'c');                                                                                                                        
+        Player player2 = new Player(2, 'c');    
+        ComputerMove cm =  new ComputerMove(player1, player2);  
+        player1.setDummyRack();
+        String result = cm.FirstMoveWord(1);                                                                                                                     
+        System.out.println("First move word: " + result);                                                                                                           
+        System.out.println("--------------------------------------");
 
     }
 }
