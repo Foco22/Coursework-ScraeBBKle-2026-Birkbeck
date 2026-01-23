@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import main.pij.model.Tile;
+import main.pij.model.WordCells;
 import main.pij.model.Bag;
 import main.pij.model.Cell;
 import main.pij.model.Board;
@@ -249,8 +250,23 @@ public class ScrabbleTest {
       Bag bag = new Bag();                                                                                                                                        
       GameManager game = new GameManager(board, player1, player2, bag, "o");    
       
-      
+      // Word exist and word that it putting it. 
+      Cell[][] cells = board.getBoard();                                                                                                                          
+      cells[0][0].setLetter('A');                                                                                                        
+      cells[0][1].setLetter('H');   
+    
+      List<int[]> positions = new ArrayList<>();                                                                                                                  
+      positions.add(new int[]{0, 0});                                                                                                                             
+      positions.add(new int[]{0, 1});                                                                                                                             
+      WordCells wordCells = new WordCells("AH", positions);  
 
+      Set<String> newlyPlacedCells = new HashSet<>();                                                                                                             
+      newlyPlacedCells.add("0,1");                                                                                                                                
+                                                                                                                                            
+      int score = game.scoreWord(board, wordCells, newlyPlacedCells, "AH");            
+      System.out.println("Score:" + score);   
+      System.out.println("A= 1 and H=4");       
+      assertEquals(5, score);                                                                                  
       System.out.println("--------------------------------------");
     }
 
