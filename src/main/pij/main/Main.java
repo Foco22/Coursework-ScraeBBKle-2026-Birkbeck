@@ -96,6 +96,7 @@ public class Main {
         //player1.initialDraw(bag);
         //player2.initialDraw(bag);
         player1.setDummyRack();
+        player2.setDummyRack2();
 
 
         // Create game manager
@@ -336,6 +337,13 @@ public class Main {
                     List<Tile> PlayerTiles = currentPlayer.getRack();
                     int[] StartPosition = board.getStartPosition();
                     boolean CheckMove = computerMove.SearchMove(currentPlayerNum, board, PlayerTiles, game, StartPosition, countTurns, currentPlayer, bag);
+                    
+                    board.showBoard(bag);
+
+                    if (countTurns > 1 ){
+                        gameRunning = false;
+                    }
+                    
                     if (CheckMove) {                                                                                                                                          
                         System.out.println("Computer played successfully!");      
                         
