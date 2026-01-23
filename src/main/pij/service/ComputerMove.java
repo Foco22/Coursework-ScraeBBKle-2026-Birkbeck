@@ -268,6 +268,10 @@ public class ComputerMove {
                 // 5 Step 5: Count the point if the movement was sucesseed.
                 String RowInputPlayerWord = validWord;
                 Integer ScorePlayerTurn = game.scoreWord(board, WordCellsPlayer, newlyPlacedCells, RowInputPlayerWord);
+                System.out.println("----------------------------");
+                System.out.println(ScorePlayerTurn);
+                System.out.println("----------------------------");
+                
                 currentPlayer.addScore(ScorePlayerTurn);
                 currentPlayer.refillRack(bag);    
                 return true;  
@@ -378,6 +382,8 @@ public class ComputerMove {
                 // 5 Step 5: Count the point if the movement was sucesseed.
                 String RowInputPlayerWord = validWord;
                 Integer ScorePlayerTurn = game.scoreWord(board, WordCellsPlayer, newlyPlacedCells, RowInputPlayerWord);
+                System.out.println("----------------------------");
+                System.out.println(ScorePlayerTurn);
                 currentPlayer.addScore(ScorePlayerTurn);
                 currentPlayer.refillRack(bag);    
                 return true;  
@@ -414,7 +420,8 @@ public class ComputerMove {
             for (int i = 0; i < availableTiles.length(); i++) {         
                 // Commodin is the same that the patrom, so it need to make a for from a to Z, to get all the possible values to this element
                 char tile = availableTiles.charAt(i); 
-                String remaining = availableTiles.substring(0, i) + availableTiles.substring(i + 1);      
+                String remaining = availableTiles.substring(0, i) + availableTiles.substring(i + 1);   
+                 
                 if  (tile == '_') {  
                     for (char letter = 'a'; letter <= 'z'; letter++) {
                         // Comodin tile                          

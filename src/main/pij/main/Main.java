@@ -305,6 +305,9 @@ public class Main {
                         // 5 Step 5: Count the point if the movement was sucesseed.
                         String RowInputPlayerWord = PlayerWord;
                         Integer ScorePlayerTurn = game.scoreWord(board, WordCellsPlayer, newlyPlacedCells, RowInputPlayerWord);
+                        System.out.println("Score fist ovment");
+                        System.out.println(ScorePlayerTurn);
+                        
                         currentPlayer.addScore(ScorePlayerTurn);
                         currentPlayer.refillRack(bag);      
                         
