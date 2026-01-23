@@ -218,7 +218,7 @@ public class ScrabbleTest {
         ComputerMove cm =  new ComputerMove(player1, player2);  
         player1.setDummyRack();
         String result = cm.FirstMoveWord(1);                                                                                                                     
-        System.out.println("First move word: " + result);                                                                                                           
+        assertNotNull("Not null", result);                                                                                                      
         System.out.println("--------------------------------------");
 
     }
