@@ -15,8 +15,10 @@ import main.pij.service.GameManager;
 import main.pij.utils.WordPermutations;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class ScrabbleTest {
@@ -269,6 +271,31 @@ public class ScrabbleTest {
       assertEquals(5, score);                                                                                  
       System.out.println("--------------------------------------");
     }
+
+    // - Test 18
+    @Test
+    public void testAreAllWordsValid() {
+                                                                                                              
+        System.out.println("testAreAllWordsValid");                                                                                                     
+        WordList.loadWords();                                                                                                                                       
+                                                                                                                                                                    
+        Board board = new Board(14, 14);                                                                                                                            
+        Player player1 = new Player(1, 'c');                                                                                                                        
+        Player player2 = new Player(2, 'c');                                                                                                                        
+        Bag bag = new Bag();                                                                                                                                        
+        GameManager game = new GameManager(board, player1, player2, bag, "o");  
+
+        Map<String, Integer> wordsOnBoard = new HashMap<>();   
+        // Way to simplify than using the method placeWord.                                                                                                     
+        wordsOnBoard.put("RUN", 1);                                                                                                                              
+                                                                                                                                                                    
+        boolean result = game.areAllWordsValid(wordsOnBoard);  
+        System.out.println(result);
+
+        System.out.println("--------------------------------------");
+
+    }
+
 
 
 }
