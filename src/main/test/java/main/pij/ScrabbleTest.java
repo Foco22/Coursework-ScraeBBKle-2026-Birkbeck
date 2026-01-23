@@ -9,8 +9,10 @@ import main.pij.model.Cell;
 import main.pij.model.Board;
 import main.pij.model.Player;
 import main.pij.model.WordList;
+import main.pij.service.ComputerMove;
 import main.pij.utils.WordPermutations;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -188,4 +190,20 @@ public class ScrabbleTest {
     
     }
 
+    @Test
+    public void testtryAllCombinations() {
+        System.out.println("testtryAllCombinations");
+        String pattern = "A_";                                                                                                                                      
+        String availableTiles = "A";        
+        Player player1 = new Player(1, 'c');                                                                                                                        
+        Player player2 = new Player(2, 'c');    
+        ComputerMove cm =  new ComputerMove(player1, player2);                                                                                                                      
+        List<String> validWords = new ArrayList<>();                                                                                                                
+                                                                                                                                                                    
+        cm.tryAllCombinations(pattern, availableTiles, 0, "", validWords);                                                                                          
+                                                                                                                                                                    
+        System.out.println(validWords);  // e.g. [AH, AL, AS]                                                                                                       
+        assertFalse(validWords.isEmpty());    
+
+    }
 }
