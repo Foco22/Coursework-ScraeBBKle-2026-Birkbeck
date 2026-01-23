@@ -45,7 +45,7 @@ public class Player {
 
     public void setDummyRack2() {
         rack.clear();
-        rack.add(new Tile('_', 8));
+        rack.add(new Tile('H', 8));
 
     }
     /**

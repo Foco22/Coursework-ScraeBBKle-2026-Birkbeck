@@ -267,8 +267,15 @@ public class ComputerMove {
                 
                 // 5 Step 5: Count the point if the movement was sucesseed.
                 String RowInputPlayerWord = validWord;
+                System.out.println("----------------------------newlyPlacedCells");
+                System.out.println(newlyPlacedCells);
+                System.out.println(WordCellsPlayer);
+                System.out.println(RowInputPlayerWord);
+
+                System.out.println("----------------------------before");
+
                 Integer ScorePlayerTurn = game.scoreWord(board, WordCellsPlayer, newlyPlacedCells, RowInputPlayerWord);
-                System.out.println("----------------------------");
+                System.out.println("----------------------------vertical");
                 System.out.println(ScorePlayerTurn);
                 System.out.println("----------------------------");
                 
