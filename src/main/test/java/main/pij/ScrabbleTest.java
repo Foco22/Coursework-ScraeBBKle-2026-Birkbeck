@@ -274,9 +274,9 @@ public class ScrabbleTest {
 
     // - Test 18
     @Test
-    public void testAreAllWordsValid() {
+    public void testAreAllWordsValidTrue() {
                                                                                                               
-        System.out.println("testAreAllWordsValid");                                                                                                     
+        System.out.println("testAreAllWordsValidTrue");                                                                                                     
         WordList.loadWords();                                                                                                                                       
                                                                                                                                                                     
         Board board = new Board(14, 14);                                                                                                                            
