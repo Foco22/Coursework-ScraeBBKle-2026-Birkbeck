@@ -10,6 +10,7 @@ import main.pij.model.Board;
 import main.pij.model.Player;
 import main.pij.model.WordList;
 import main.pij.service.ComputerMove;
+import main.pij.service.GameManager;
 import main.pij.utils.WordPermutations;
 
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ public class ScrabbleTest {
     // ==================== MODEL TESTS ====================
 
     // --- Tile Tests ---
+    // - Test 1
     @Test
     public void testTileCreation() {
         System.out.println("testTileCreation");
@@ -32,6 +34,7 @@ public class ScrabbleTest {
         assertEquals(1, tile.getValue());
     }
 
+    // - Test 2
     @Test
     public void testWildcardTile() {
         System.out.println("testWildcardTile");
@@ -42,6 +45,7 @@ public class ScrabbleTest {
         assertEquals(8, wildcard.getValue());
     }
 
+    // - Test 3
     @Test 
     public void TestBagInitialization() {
         System.out.println("TestBagInitialization");
@@ -51,6 +55,7 @@ public class ScrabbleTest {
         assertEquals(100, bag.tilesRemaining()); // Standard Scrabble bag has 100 tiles
     }
 
+    // - Test 4
     @Test
     public void TestShowbag() {
         System.out.println("testDrawTiles");
@@ -62,6 +67,7 @@ public class ScrabbleTest {
 
     }
 
+    // - Test 5
     @Test
     public void testDrawTiles() {
         System.out.println("testDrawTiles");
@@ -77,6 +83,7 @@ public class ScrabbleTest {
         assertEquals(93, bag.tilesRemaining());
     }
 
+    // - Test 6
     @Test
     public void testCellCreation() {
         System.out.println("testCellCreation");
@@ -88,6 +95,7 @@ public class ScrabbleTest {
         assertEquals(3, cell.getWordMult());
     }   
 
+    // - Test 7
     @Test
     public void testCelltoString() {
         System.out.println("testCelltoString");
@@ -97,6 +105,7 @@ public class ScrabbleTest {
         assertEquals("B", cell.toString());
     }
 
+    // - Test 8
     @Test
     public void testBoardCreation() {
         System.out.println("testBoardCreation");
@@ -107,6 +116,7 @@ public class ScrabbleTest {
         assertNotNull(board);
     }
 
+    // - Test 9
     @Test
     public void testLoadBoardFromFile() {
         System.out.println("testLoadBoardFromFile");
@@ -125,6 +135,7 @@ public class ScrabbleTest {
         }
     }
 
+    // - Test 10
     @Test
     public void testPlayerInitialDraw() {
         System.out.println("testPlayerInitialDraw");
@@ -140,6 +151,7 @@ public class ScrabbleTest {
         System.out.println("--------------------------------------");
     }
 
+    // - Test 11
     @Test
     public void testWordList() {
         System.out.println("testLoadWordList");
@@ -150,6 +162,7 @@ public class ScrabbleTest {
         System.out.println("--------------------------------------");
     }
 
+    // - Test 12
     @Test 
     public void testPermutationWord() {
         System.out.println("testPermutationWord");
@@ -163,6 +176,7 @@ public class ScrabbleTest {
     
     }
 
+    // - Test 13
     @Test 
     public void testDummyTiles() {
         System.out.println("testDummyTiles");
@@ -178,6 +192,7 @@ public class ScrabbleTest {
     
     }
 
+    // - Test 14
     @Test 
     public void testsSizeinitializeTiles() {
         System.out.println("testsSizeinitializeTiles");
@@ -190,6 +205,7 @@ public class ScrabbleTest {
     
     }
 
+    // - Test 15
     @Test
     public void testtryAllCombinations() {
         System.out.println("testtryAllCombinations");
@@ -208,6 +224,7 @@ public class ScrabbleTest {
 
     }
 
+    // - Test 16
     @Test
     public void testFirstMoveWord() {
         System.out.println("testFirstMoveWord");
@@ -220,6 +237,22 @@ public class ScrabbleTest {
         String result = cm.FirstMoveWord(1);                                                                                                                     
         assertNotNull("Not null", result);                                                                                                      
         System.out.println("--------------------------------------");
-
     }
+
+    // - Test 17
+    @Test
+    public void testScoreMove() {
+      System.out.println("testScoreMove");
+      Board board = new Board(14, 14);                                                                                                                            
+      Player player1 = new Player(1, 'c');                                                                                                                        
+      Player player2 = new Player(2, 'c');                                                                                                                        
+      Bag bag = new Bag();                                                                                                                                        
+      GameManager game = new GameManager(board, player1, player2, bag, "o");    
+      
+      
+
+      System.out.println("--------------------------------------");
+    }
+
+
 }
