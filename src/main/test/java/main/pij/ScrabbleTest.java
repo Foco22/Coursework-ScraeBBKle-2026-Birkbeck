@@ -317,6 +317,23 @@ public class ScrabbleTest {
             assertEquals(false, result); // Check board size
             System.out.println("--------------------------------------");
         }
-    
 
+        @Test                                                                                                                                                           
+        public void testUnplayedTilesValue() {                                                                                                                          
+            System.out.println("testUnplayedTilesValue");                                                                                                               
+                                                                                                                                                                        
+            Board board = new Board(14, 14);                                                                                                                            
+            Player player1 = new Player(1, 'c');                                                                                                                        
+            Player player2 = new Player(2, 'c');                                                                                                                        
+            Bag bag = new Bag();                                                                                                                                        
+            GameManager game = new GameManager(board, player1, player2, bag, "open");                                                                                   
+                                                                                                                                                                        
+            player1.setDummyRack();  // As the A =1 and _ (8). It is the dummy set
+
+            int result = game.unplayedTilesValue(player1);                                                                                                              
+                                                                                                                                                                  
+            System.out.println("Unplayed tiles value: " + result);
+            System.out.println("--------------------------------------");
+
+        }
 }
