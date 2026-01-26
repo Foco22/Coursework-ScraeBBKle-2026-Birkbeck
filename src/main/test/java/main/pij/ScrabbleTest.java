@@ -349,4 +349,15 @@ public class ScrabbleTest {
         assertEquals(true, type); 
         System.out.println("--------------------------------------");
     }
+
+    // - Test 22
+    @Test
+    public void testgetletterValueBag() {
+        System.out.println("testletterValue");
+        Bag bag = new Bag();
+        int value = bag.letterValue('Z');
+        System.out.println("Letter Z value: " + value);
+        assertEquals(9, value);
+        System.out.println("--------------------------------------");
+    }
 }
