@@ -19,7 +19,6 @@ public class WordList {
             while ((line = reader.readLine()) != null) {
                 words.add(line.trim().toLowerCase());
             }
-            System.out.println("Loaded " + words.size() + " words from " + filename);
         } catch (IOException e) {
             System.out.println("Error loading wordlist: " + e.getMessage());
         }

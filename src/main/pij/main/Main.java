@@ -77,19 +77,19 @@ public class Main {
         
         //  Players
         System.out.print("Player 1 - Enter 'h' for human or 'c' for computer: ");
-        // char player1Type = scanner.nextLine().trim().toLowerCase().charAt(0);
-        char player1Type = 'c';
+        char player1Type = scanner.nextLine().trim().toLowerCase().charAt(0);
+        //char player1Type = 'c';
         Player player1 = new Player(1, player1Type);
 
         System.out.print("Player 2 - Enter 'h' for human or 'c' for computer: ");
-        //char player2Type = scanner.nextLine().trim().toLowerCase().charAt(0);
-        char player2Type = 'c';
+        char player2Type = scanner.nextLine().trim().toLowerCase().charAt(0);
+        //char player2Type = 'c';
         Player player2 = new Player(2, player2Type);
 
         // 3. Game type (it is still not used the class, but we prepare the input)
         System.out.print("Would you like to play an _o_pen or a _c_losed game? ");
-        // String gameType = scanner.nextLine().trim().toLowerCase();
-        String gameType = String.valueOf('o');
+        String gameType = scanner.nextLine().trim().toLowerCase();
+        //String gameType = String.valueOf('o');
 
         // 4. Initialize bag and draw tiles
         Bag bag = new Bag();
@@ -340,13 +340,6 @@ public class Main {
                     List<Tile> PlayerTiles = currentPlayer.getRack();
                     int[] StartPosition = board.getStartPosition();
                     boolean CheckMove = computerMove.SearchMove(currentPlayerNum, board, PlayerTiles, game, StartPosition, countTurns, currentPlayer, bag);
-                    System.out.println(countTurns);
-                    System.out.println("-------------------------Count");
-                    board.showBoard(bag);
-
-                    if (countTurns >= 1 ){
-                        gameRunning = false;
-                    }
                     
                     if (CheckMove) {                                                                                                                                          
                         System.out.println("Computer played successfully!");      
