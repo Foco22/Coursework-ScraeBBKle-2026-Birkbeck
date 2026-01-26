@@ -295,46 +295,58 @@ public class ScrabbleTest {
         System.out.println("--------------------------------------");
     }
 
-        // - Test 19
-        @Test
-        public void testAreAllWordsValidFalse() {
-                                                                                                                  
-            System.out.println("testAreAllWordsValidFalse");                                                                                                     
-            WordList.loadWords();                                                                                                                                       
-                                                                                                                                                                        
-            Board board = new Board(14, 14);                                                                                                                            
-            Player player1 = new Player(1, 'c');                                                                                                                        
-            Player player2 = new Player(2, 'c');                                                                                                                        
-            Bag bag = new Bag();                                                                                                                                        
-            GameManager game = new GameManager(board, player1, player2, bag, "o");  
-    
-            Map<String, Integer> wordsOnBoard = new HashMap<>();   
-            // Way to simplify than using the method placeWord.                                                                                                     
-            wordsOnBoard.put("AAAAAAA", 1);                                                                                                                              
-                                                                                                                                                                        
-            boolean result = game.areAllWordsValid(wordsOnBoard);  
-            System.out.println(result);
-            assertEquals(false, result); // Check board size
-            System.out.println("--------------------------------------");
-        }
+    // - Test 19
+    @Test
+    public void testAreAllWordsValidFalse() {
+                                                                                                                
+        System.out.println("testAreAllWordsValidFalse");                                                                                                     
+        WordList.loadWords();                                                                                                                                       
+                                                                                                                                                                    
+        Board board = new Board(14, 14);                                                                                                                            
+        Player player1 = new Player(1, 'c');                                                                                                                        
+        Player player2 = new Player(2, 'c');                                                                                                                        
+        Bag bag = new Bag();                                                                                                                                        
+        GameManager game = new GameManager(board, player1, player2, bag, "o");  
 
-        @Test                                                                                                                                                           
-        public void testUnplayedTilesValue() {                                                                                                                          
-            System.out.println("testUnplayedTilesValue");                                                                                                               
-                                                                                                                                                                        
-            Board board = new Board(14, 14);                                                                                                                            
-            Player player1 = new Player(1, 'c');                                                                                                                        
-            Player player2 = new Player(2, 'c');                                                                                                                        
-            Bag bag = new Bag();                                                                                                                                        
-            GameManager game = new GameManager(board, player1, player2, bag, "open");                                                                                   
-                                                                                                                                                                        
-            player1.setDummyRack();  // As the A =1 and _ (8). It is the dummy set
+        Map<String, Integer> wordsOnBoard = new HashMap<>();   
+        // Way to simplify than using the method placeWord.                                                                                                     
+        wordsOnBoard.put("AAAAAAA", 1);                                                                                                                              
+                                                                                                                                                                    
+        boolean result = game.areAllWordsValid(wordsOnBoard);  
+        System.out.println(result);
+        assertEquals(false, result); // Check board size
+        System.out.println("--------------------------------------");
+    }
 
-            int result = game.unplayedTilesValue(player1);                                                                                                              
-                                                                                                                                                                  
-            System.out.println("Unplayed tiles value: " + result);
-            assertEquals(9, result); 
-            System.out.println("--------------------------------------");
+    // - Test 20
+    @Test                                                                                                                                                           
+    public void testUnplayedTilesValue() {                                                                                                                          
+        System.out.println("testUnplayedTilesValue");                                                                                                               
+                                                                                                                                                                    
+        Board board = new Board(14, 14);                                                                                                                            
+        Player player1 = new Player(1, 'c');                                                                                                                        
+        Player player2 = new Player(2, 'c');                                                                                                                        
+        Bag bag = new Bag();                                                                                                                                        
+        GameManager game = new GameManager(board, player1, player2, bag, "open");                                                                                   
+                                                                                                                                                                    
+        player1.setDummyRack();  // As the A =1 and _ (8). It is the dummy set
 
-        }
+        int result = game.unplayedTilesValue(player1);                                                                                                              
+                                                                                                                                                                
+        System.out.println("Unplayed tiles value: " + result);
+        assertEquals(9, result); 
+        System.out.println("--------------------------------------");
+
+    }
+
+    // - Test 21
+    @Test
+    public void testPlayerIsHuman() {
+        System.out.println("testPlayerIsHuman");
+        Player player = new Player(1, 'h');
+        boolean type = player.isHuman();
+        System.out.println("Player type: " + type);
+        assertEquals(true, type); 
+        System.out.println("--------------------------------------");
+    }
 }
